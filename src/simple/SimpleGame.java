@@ -33,7 +33,8 @@ public class SimpleGame extends GridGame
         sBoard = (SimpleBoard) board;
         sStatus = (SimpleStatus) status;
         keyPressed = "";
-        prefs = Preferences.getInstance("simple");    }
+        prefs = Preferences.getInstance("simple");
+    }
     
     public GridBoard getBoardToView()
     {

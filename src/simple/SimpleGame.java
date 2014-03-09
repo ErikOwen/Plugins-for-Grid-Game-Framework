@@ -24,6 +24,7 @@ public class SimpleGame extends GridGame
     private int timeSeconds;
     private Timer timer;
     private String keyPressed;
+    private Preferences prefs;
     
     public SimpleGame(GridBoard board, GridStatus status)
     {
@@ -32,7 +33,7 @@ public class SimpleGame extends GridGame
         sBoard = (SimpleBoard) board;
         sStatus = (SimpleStatus) status;
         keyPressed = "";
-    }
+        prefs = Preferences.getInstance("simple");    }
     
     public GridBoard getBoardToView()
     {
@@ -51,7 +52,7 @@ public class SimpleGame extends GridGame
         gameOver = false;
         timeSeconds = 0;
 
-        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + " " + String.format("%02d", timeSeconds % 60) + keyPressed;
+        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + ":" + String.format("%02d", timeSeconds % 60) + keyPressed;
         sStatus.setLabelText(labelText);
         
         ActionListener timerListener = new ActionListener()
@@ -60,11 +61,10 @@ public class SimpleGame extends GridGame
             public void actionPerformed(ActionEvent e)
             {
                 timeSeconds++;
-                String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + " " + String.format("%02d", timeSeconds % 60) + keyPressed;
+                String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + ":" + String.format("%02d", timeSeconds % 60) + keyPressed;
                 sStatus.setLabelText(labelText);
             }
         };
-        
         timer = new Timer(1000, timerListener);
         timer.setInitialDelay(1000);
         timer.start();
@@ -75,7 +75,7 @@ public class SimpleGame extends GridGame
     {
         moveCount++;
         sBoard.makeMove(row, col);
-        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + " " + String.format("%02d", timeSeconds % 60) + keyPressed;
+        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + ":" + String.format("%02d", timeSeconds % 60) + keyPressed;
         sStatus.setLabelText(labelText);
         setChanged();
         notifyObservers();
@@ -91,7 +91,7 @@ public class SimpleGame extends GridGame
         {
         	timer.stop();
             JOptionPane.showMessageDialog(null, "You've Won!");
-            saveScore(timeSeconds / 60 + " " + String.format("%02d", timeSeconds % 60));
+            saveScore(timeSeconds / 60 + " : " + String.format("%02d", timeSeconds % 60));
         }
     }
     
@@ -107,8 +107,20 @@ public class SimpleGame extends GridGame
     
     public void restart()
     {
-        sBoard.reset(Integer.parseInt(getPreference("Board Size")));
+    	try
+    	{
+    		timer.stop();
+    		sBoard.reset();
+    	}
+    	catch(Exception e) 
+    	{
+//    		e.printStackTrace();
+    	}
         init();
+        
+        setChanged();
+        notifyObservers(getPreference("Background Color"));
+        
         setChanged();
         notifyObservers();
     }
@@ -150,7 +162,7 @@ public class SimpleGame extends GridGame
 			@Override
 			public void processDown() {
 				keyPressed = "   Down Pressed";
-		        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + " " + String.format("%02d", timeSeconds % 60) + keyPressed;
+		        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + ":" + String.format("%02d", timeSeconds % 60) + keyPressed;
 		        sStatus.setLabelText(labelText);
 		        setChanged();
 		        notifyObservers();
@@ -159,7 +171,7 @@ public class SimpleGame extends GridGame
 			@Override
 			public void processLeft() {
 				keyPressed = "   Left Pressed";
-		        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + " " + String.format("%02d", timeSeconds % 60) + keyPressed;
+		        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + ":" + String.format("%02d", timeSeconds % 60) + keyPressed;
 		        sStatus.setLabelText(labelText);
 		        setChanged();
 		        notifyObservers();
@@ -168,7 +180,7 @@ public class SimpleGame extends GridGame
 			@Override
 			public void processRight() {
 				keyPressed = "   Right Pressed";
-		        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + " " + String.format("%02d", timeSeconds % 60) + keyPressed;
+		        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + ":" + String.format("%02d", timeSeconds % 60) + keyPressed;
 		        sStatus.setLabelText(labelText);
 		        setChanged();
 		        notifyObservers();
@@ -177,7 +189,7 @@ public class SimpleGame extends GridGame
 			@Override
 			public void processUp() {
 				keyPressed = "   Up Pressed";
-		        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + " " + String.format("%02d", timeSeconds % 60) + keyPressed;
+		        String labelText = "Moves: " + moveCount + "   Time " + timeSeconds / 60 + ":" + String.format("%02d", timeSeconds % 60) + keyPressed;
 		        sStatus.setLabelText(labelText);
 		        setChanged();
 		        notifyObservers();

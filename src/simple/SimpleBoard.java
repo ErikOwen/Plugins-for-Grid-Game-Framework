@@ -16,8 +16,7 @@ public class SimpleBoard extends GridBoard<SimpleCell>
     public SimpleBoard()
     {
         super();
-        prefs = Preferences.getInstance("simple");
-        reset(Integer.parseInt(prefs.get("Board Size")));
+        reset();
     }
     
     public void makeMove(int row, int col)
@@ -25,8 +24,10 @@ public class SimpleBoard extends GridBoard<SimpleCell>
         board[row][col].decrement();
     }
     
-    public void reset(int size)
+    public void reset()
     {
+    	Preferences prefs = Preferences.getInstance("simple");
+    	int size = Integer.parseInt(prefs.get("Board Size"));
         board = new SimpleCell[size][size];
         for (int i = 0; i < size; i++)
         {

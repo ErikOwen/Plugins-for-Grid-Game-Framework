@@ -56,12 +56,12 @@ public final class GameLoader extends Object
 				
 				if(args[1].equals("GUI"))
 				{
-					app = new GridGUI("Simple", game);
+					app = new GridGUI(args[0], game);
 					
 				}
 				else if(args[1].equals("Console"))
 				{
-					app = new GridConsole("Simple", game);
+					app = new GridConsole(args[0], game);
 				}
 				
 				if(args.length == 4)

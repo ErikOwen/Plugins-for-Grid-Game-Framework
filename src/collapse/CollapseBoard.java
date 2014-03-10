@@ -21,6 +21,8 @@ public class CollapseBoard extends GridBoard<CollapseCell>{
         prefs = prefs.getInstance("collapse");
     }
     
+    
+    
     public void resetBoard(int boardNumber)
     {
     	final int boardSize = Integer.parseInt(prefs.get("Board Size"));

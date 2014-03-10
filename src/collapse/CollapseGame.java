@@ -9,7 +9,6 @@ import gridgame.Preferences;
 
 public class CollapseGame extends GridGame {
 
-    private static GridImages im;
     private CollapseBoard cBoard;
     private CollapseStatus cStatus;
     private Preferences prefs;
@@ -18,10 +17,9 @@ public class CollapseGame extends GridGame {
     public CollapseGame(GridBoard board, GridStatus status)
     {
         super();
-        im = GridImages.createInstance("Simple");
         cBoard = (CollapseBoard)board;
         cStatus = (CollapseStatus)status;
-        prefs = Preferences.getInstance("simple");
+        prefs = Preferences.getInstance("collapse");
         
         init();
     }

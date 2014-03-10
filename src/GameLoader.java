@@ -4,6 +4,7 @@ import gridgame.GridGUI;
 import gridgame.GridGame;
 import gridgame.GridStatus;
 import gridgame.GridView;
+import gridgame.SimpleDialoger;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,6 +28,7 @@ public final class GameLoader extends Object
 	{
 		final String gameName;
 		GridView app = null;
+		SimpleDialoger dialoger = null;
 		String [] classNames = {"Board", "Status", "Game"};
 		Object [] curParams = new Object [] {};
 		int ndx = 0;
@@ -52,16 +54,16 @@ public final class GameLoader extends Object
 				curParams = new Object [] {board, status};
 				GridGame game = (GridGame) curConstr.newInstance(curParams);
 				
-				game.init();
-				
 				if(args[1].equals("GUI"))
 				{
 					app = new GridGUI(args[0], game);
+					dialoger = app.getDialoger();
 					
 				}
 				else if(args[1].equals("Console"))
 				{
 					app = new GridConsole(args[0], game);
+					dialoger = app.getDialoger();
 				}
 				
 				if(args.length == 4)
@@ -79,6 +81,9 @@ public final class GameLoader extends Object
 			        app.setIOsources(new InputStreamReader(System.in), 
 			            new OutputStreamWriter(System.out));
 				}
+				
+				game.setDialoger(dialoger);
+				game.init();
 				
 				app.createUI();
 				game.addObserver(app);

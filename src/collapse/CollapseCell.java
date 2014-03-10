@@ -13,26 +13,44 @@ public class CollapseCell implements Renderable {
 	@Override
     public String getText()
     {
-//        return value.toString();
-		return "";
+		String text = " ";
+		
+		if(state == CollapsePiece.green)
+		{
+			text = "+";
+		}
+		else if(state == CollapsePiece.red)
+		{
+			text = "o";
+		}
+		else if(state == CollapsePiece.purple)
+		{
+			text = "x";
+		}
+		
+		return text;
     }
     
 	@Override
     public String toString()
     {
-//        String nbsp = "&nbsp;";
-//        String returnVal = nbsp + nbsp + nbsp + nbsp +
-//            value.toString() + nbsp + nbsp + nbsp + nbsp;
-//        if(value.toString().equals("0"))
-//        {
-//            returnVal = "black";
-//        }
-//        return returnVal;
-		return "";
+		String stateStr = null;
+		
+		if(state != CollapsePiece.empty)
+		{
+			stateStr = state.toString();
+		}
+		
+		return stateStr;
     }
 	
 	public void setToEmpty() {
 		state = CollapsePiece.empty;
+	}
+	
+	public CollapsePiece getState()
+	{
+		return state;
 	}
 
 }

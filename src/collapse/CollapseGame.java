@@ -13,6 +13,7 @@ public class CollapseGame extends GridGame {
     private CollapseBoard cBoard;
     private CollapseStatus cStatus;
     private Preferences prefs;
+    private int numMoves;
 	
     public CollapseGame(GridBoard board, GridStatus status)
     {
@@ -21,31 +22,39 @@ public class CollapseGame extends GridGame {
         cBoard = (CollapseBoard)board;
         cStatus = (CollapseStatus)status;
         prefs = Preferences.getInstance("simple");
+        
+        init();
     }
 	
 	
 	@Override
 	public GridBoard getBoardToView() {
-		// TODO Auto-generated method stub
-		return null;
+		return cBoard;
 	}
 
 	@Override
 	public GridStatus getStatusToView() {
-		// TODO Auto-generated method stub
-		return null;
+		return cStatus;
 	}
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
+		setRandomGame();
+		cBoard.resetBoard(getGame());
+		numMoves = 0;
 		
 	}
 
 	@Override
-	public void makeMove(int arg0, int arg1) {
-		// TODO Auto-generated method stub
+	public void makeMove(int row, int col) {
+		if(cBoard.getValueAt(row, col).getState() != CollapsePiece.empty)
+		{
+			cBoard.makeMove(row, col);
+			numMoves++;
+		}
 		
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override

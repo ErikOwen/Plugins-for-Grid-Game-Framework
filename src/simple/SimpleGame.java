@@ -240,6 +240,8 @@ public class SimpleGame extends GridGame
         }
     }
     
+
+    
     public void setPreferences(Preferences prefs)
     {
         super.setPreferences(prefs);

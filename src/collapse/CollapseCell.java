@@ -34,7 +34,7 @@ public class CollapseCell implements Renderable {
 	@Override
     public String toString()
     {
-		String stateStr = null;
+		String stateStr = "";
 		
 		if(state != CollapsePiece.empty)
 		{

@@ -274,6 +274,22 @@ public class CollapseBoard extends GridBoard<CollapseCell>{
         return isEmpty;
     }
     
+    public void setToCheat()
+    {
+        /*Iterates through all of the rows of the current board*/
+        for (int rowIter = 0; rowIter < getRowCount(); rowIter++)
+        {
+            /*Iterates throug all of the columns of the current board*/
+            for(int colIter = 0; colIter < getColumnCount(); colIter++)
+            {          
+                board[rowIter][colIter] = new CollapseCell(CollapsePiece.empty);
+            }
+        
+            board[0][0] = new CollapseCell(CollapsePiece.green);
+            board[0][1] = new CollapseCell(CollapsePiece.green);  
+        }
+    }
+    
     @Override
     public int getRowCount()
     {

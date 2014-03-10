@@ -1,0 +1,105 @@
+Collapse - board 1216
+Tiles left: 64    Moves: 0
+     1  2  3  4  5  6  7  8
+ A:  o  +  o  o  +  x  x  +
+ B:  o  +  +  o  +  o  x  x
+ C:  +  +  o  o  o  +  o  +
+ D:  +  +  +  x  o  +  o  x
+ E:  o  o  o  o  +  +  o  o
+ F:  x  o  +  o  +  +  +  +
+ G:  +  o  +  +  +  o  o  +
+ H:  +  x  o  x  +  o  +  x
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Select Game: Enter desired game number (1 - 5000):
+Collapse - board 3
+Tiles left: 64    Moves: 0
+     1  2  3  4  5  6  7  8
+ A:  o  o  +  x  +  +  +  x
+ B:  x  x  +  x  o  x  +  x
+ C:  +  +  x  x  x  +  x  o
+ D:  x  x  o  o  o  o  o  o
+ E:  +  +  o  +  +  +  +  x
+ F:  x  o  o  x  o  x  o  o
+ G:  x  o  +  +  +  x  +  x
+ H:  +  x  +  +  o  x  x  o
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 3
+Tiles left: 62    Moves: 1
+     1  2  3  4  5  6  7  8
+ A:        +  x  +  +  +  x
+ B:  x  x  +  x  o  x  +  x
+ C:  +  +  x  x  x  +  x  o
+ D:  x  x  o  o  o  o  o  o
+ E:  +  +  o  +  +  +  +  x
+ F:  x  o  o  x  o  x  o  o
+ G:  x  o  +  +  +  x  +  x
+ H:  +  x  +  +  o  x  x  o
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 3
+Tiles left: 60    Moves: 2
+     1  2  3  4  5  6  7  8
+ A:        +  x  +  +  +  x
+ B:        +  x  o  x  +  x
+ C:  x  x  x  x  x  +  x  o
+ D:  x  x  o  o  o  o  o  o
+ E:  +  +  o  +  +  +  +  x
+ F:  x  o  o  x  o  x  o  o
+ G:  x  o  +  +  +  x  +  x
+ H:  +  x  +  +  o  x  x  o
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 3
+Tiles left: 51    Moves: 3
+     1  2  3  4  5  6  7  8
+ A:                 +  +  x
+ B:        +     +  x  +  x
+ C:        +     o  +  x  o
+ D:        o  o  o  o  o  o
+ E:  +  +  o  +  +  +  +  x
+ F:  x  o  o  x  o  x  o  o
+ G:  x  o  +  +  +  x  +  x
+ H:  +  x  +  +  o  x  x  o
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 3
+Tiles left: 49    Moves: 4
+     1  2  3  4  5  6  7  8
+ A:                 +  +  x
+ B:        +     +  x  +  x
+ C:        +     o  +  x  o
+ D:        o  o  o  o  o  o
+ E:        o  +  +  +  +  x
+ F:  x  o  o  x  o  x  o  o
+ G:  x  o  +  +  +  x  +  x
+ H:  +  x  +  +  o  x  x  o
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 3
+Tiles left: 45    Moves: 5
+     1  2  3  4  5  6  7  8
+ A:                       x
+ B:        +        +  +  x
+ C:        +     +  x  +  o
+ D:        o     o  +  x  o
+ E:        o  o  o  o  o  x
+ F:  x  o  o  x  o  x  o  o
+ G:  x  o  +  +  +  x  +  x
+ H:  +  x  +  +  o  x  x  o
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 3
+Tiles left: 32    Moves: 6
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:                       x
+ C:                 +     x
+ D:                 x  +  o
+ E:        +        +  +  o
+ F:  x     +  x  +  x  x  x
+ G:  x     +  +  +  x  +  x
+ H:  +  x  +  +  o  x  x  o
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 

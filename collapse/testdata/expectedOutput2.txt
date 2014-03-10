@@ -1,0 +1,146 @@
+Select Game: Enter desired game number (1 - 5000):
+Collapse - board 2
+Tiles left: 64    Moves: 0
+     1  2  3  4  5  6  7  8
+ A:  x  +  o  x  +  +  +  +
+ B:  x  +  o  o  x  +  o  o
+ C:  x  +  o  o  +  +  o  x
+ D:  x  +  x  o  +  x  x  +
+ E:  x  o  x  o  +  x  x  o
+ F:  o  x  o  x  +  +  x  +
+ G:  x  o  o  x  x  x  o  x
+ H:  +  x  o  o  o  x  x  +
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 2
+Tiles left: 58    Moves: 1
+     1  2  3  4  5  6  7  8
+ A:  x              +  +  +
+ B:  x  +     x  +  +  o  o
+ C:  x  +     o  x  +  o  x
+ D:  x  +  o  o  +  x  x  +
+ E:  x  +  o  o  +  x  x  o
+ F:  o  o  o  o  +  +  x  +
+ G:  x  x  x  x  +  x  o  x
+ H:  +  x  x  x  x  x  x  +
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 2
+Tiles left: 47    Moves: 2
+     1  2  3  4  5  6  7  8
+ A:                       +
+ B:  x                 +  o
+ C:  x           +  +  o  x
+ D:  x  +     x  x  +  o  +
+ E:  x  +     o  +  +  x  o
+ F:  x  +  o  o  +  x  x  +
+ G:  o  +  o  o  +  x  x  x
+ H:  +  o  o  o  +  +  o  +
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 2
+Tiles left: 38    Moves: 3
+     1  2  3  4  5  6  7  8
+ A:                       +
+ B:  x                 +  o
+ C:  x                 o  x
+ D:  x  +     x        o  +
+ E:  x  +     o        x  o
+ F:  x  +  o  o        x  +
+ G:  o  +  o  o     x  x  x
+ H:  +  o  o  o  x  x  o  +
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 2
+Tiles left: 31    Moves: 4
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:  x              +      
+ C:  x              o      
+ D:  x  +     x     x      
+ E:  x  +     o  +  +      
+ F:  x  +  o  o  o  o      
+ G:  o  +  o  o  o  +      
+ H:  +  o  o  o  o  +      
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 2
+Tiles left: 19    Moves: 5
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:     x                  
+ C:     x           +      
+ D:     x           o      
+ E:     x  +        x      
+ F:     x  +        +      
+ G:     o  +        +      
+ H:     +  +  x  +  +      
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 2
+Tiles left: 15    Moves: 6
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:     x                  
+ C:     x                  
+ D:     x                  
+ E:     x  +               
+ F:     x  +     +         
+ G:     o  +     o         
+ H:     +  +  x  x         
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 2
+Tiles left: 13    Moves: 7
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:        x               
+ C:        x               
+ D:        x               
+ E:        x  +            
+ F:        x  +            
+ G:        o  +  +         
+ H:        +  +  o         
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 2
+Tiles left: 7    Moves: 8
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:                        
+ C:           x            
+ D:           x            
+ E:           x            
+ F:           x            
+ G:           x            
+ H:           o  o         
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 2
+Tiles left: 5    Moves: 9
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:                        
+ C:                        
+ D:           x            
+ E:           x            
+ F:           x            
+ G:           x            
+ H:           x            
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 2
+Tiles left: 0    Moves: 10
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:                        
+ C:                        
+ D:                        
+ E:                        
+ F:                        
+ G:                        
+ H:                        
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Game Won Notification: Game 2 Cleared! 
+Save your score? (y/n)

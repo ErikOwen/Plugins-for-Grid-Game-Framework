@@ -1,0 +1,184 @@
+Collapse - board 44
+Tiles left: 64    Moves: 0
+     1  2  3  4  5  6  7  8
+ A:  +  x  o  o  +  x  o  +
+ B:  o  o  x  x  x  o  +  +
+ C:  o  x  +  +  o  +  +  +
+ D:  o  +  x  +  +  +  x  +
+ E:  +  x  o  o  +  x  o  +
+ F:  x  x  o  x  +  x  +  x
+ G:  x  o  o  x  +  +  x  o
+ H:  +  x  o  +  x  o  x  x
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 62    Moves: 1
+     1  2  3  4  5  6  7  8
+ A:  +  x  o  o  +     o  +
+ B:  o  o  x  x  x     +  +
+ C:  o  x  +  +  o  x  +  +
+ D:  o  +  x  +  +  o  x  +
+ E:  +  x  o  o  +  +  o  +
+ F:  x  x  o  x  +  +  +  x
+ G:  x  o  o  x  +  +  x  o
+ H:  +  x  o  +  x  o  x  x
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 51    Moves: 2
+     1  2  3  4  5  6  7  8
+ A:  +  x                 +
+ B:  o  o  o           o  +
+ C:  o  x  x  o        +  +
+ D:  o  +  x  x        +  +
+ E:  +  x  o  o  +     x  +
+ F:  x  x  o  x  x  x  o  x
+ G:  x  o  o  x  o  o  x  o
+ H:  +  x  o  +  x  o  x  x
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 48    Moves: 3
+     1  2  3  4  5  6  7  8
+ A:  +  x                 +
+ B:  o  o  o           o  +
+ C:  o  x  x  o        +  +
+ D:  o  +  x  x        +  +
+ E:  +  x  o  o        x  +
+ F:  x  x  o  x  +     o  x
+ G:  x  o  o  x  x     x  o
+ H:  +  x  o  +  x  x  x  x
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 40    Moves: 4
+     1  2  3  4  5  6  7  8
+ A:  +  x                  
+ B:  o  o  o           +   
+ C:  o  x  x           +   
+ D:  o  +  x        o  +   
+ E:  +  x  o  o     +  +   
+ F:  x  x  o  x     +  +   
+ G:  x  o  o  o     x  x   
+ H:  +  x  o  +  +  o  o   
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 38    Moves: 5
+     1  2  3  4  5  6  7  8
+ A:  +  x                  
+ B:  o  o  o        +      
+ C:  o  x  x        +      
+ D:  o  +  x     o  +      
+ E:  +  x  o     +  +      
+ F:  x  x  o  o  +  +      
+ G:  x  o  o  x  x  x      
+ H:  +  x  o  o  o  o      
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 29    Moves: 6
+     1  2  3  4  5  6  7  8
+ A:  +                     
+ B:  o  x                  
+ C:  o  o           +      
+ D:  o  x           +      
+ E:  +  +        o  +      
+ F:  x  x  o     +  +      
+ G:  x  x  x     +  +      
+ H:  +  x  x  x  x  x      
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 19    Moves: 7
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:                        
+ C:     +                  
+ D:     o           +      
+ E:     o  x        +      
+ F:     o  o     o  +      
+ G:     +  x     +  +      
+ H:     +  +  o  +  +      
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 12    Moves: 8
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:                        
+ C:     +                  
+ D:     o                  
+ E:     o  x               
+ F:     o  o               
+ G:     +  x               
+ H:     +  +  o  o         
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 10    Moves: 9
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:                        
+ C:        +               
+ D:        o               
+ E:        o  x            
+ F:        o  o            
+ G:        +  x            
+ H:        +  +            
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 7    Moves: 10
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:                        
+ C:                        
+ D:                        
+ E:        +               
+ F:        o  x            
+ G:        o  o            
+ H:        o  x            
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 3    Moves: 11
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:                        
+ C:                        
+ D:                        
+ E:                        
+ F:                        
+ G:           x            
+ H:        +  x            
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 2    Moves: 11
+     1  2  3  4  5  6  7  8
+ A:  +  +                  
+ B:                        
+ C:                        
+ D:                        
+ E:                        
+ F:                        
+ G:                        
+ H:                        
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 44
+Tiles left: 0    Moves: 12
+     1  2  3  4  5  6  7  8
+ A:                        
+ B:                        
+ C:                        
+ D:                        
+ E:                        
+ F:                        
+ G:                        
+ H:                        
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Game Won Notification: Game 44 Cleared! 
+Save your score? (y/n)

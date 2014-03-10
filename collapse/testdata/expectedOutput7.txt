@@ -1,0 +1,66 @@
+Collapse - board 3951
+Tiles left: 64    Moves: 0
+     1  2  3  4  5  6  7  8
+ A:  o  +  x  x  o  +  x  x
+ B:  +  x  x  o  +  o  +  o
+ C:  x  o  o  +  o  x  +  x
+ D:  x  o  o  x  o  o  x  x
+ E:  o  o  x  +  +  x  x  o
+ F:  x  x  o  o  o  x  o  x
+ G:  +  +  +  o  o  o  x  +
+ H:  x  x  x  o  x  o  +  +
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Select Game: Enter desired game number (1 - 5000):
+Collapse - board 988
+Tiles left: 64    Moves: 0
+     1  2  3  4  5  6  7  8
+ A:  x  x  o  x  x  o  +  x
+ B:  +  +  +  x  x  o  x  +
+ C:  x  o  x  o  o  o  x  x
+ D:  x  o  o  o  o  o  +  +
+ E:  o  o  o  o  x  x  x  +
+ F:  o  +  +  x  x  o  +  o
+ G:  +  +  x  x  +  o  x  x
+ H:  +  o  o  +  +  x  +  x
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 988
+Tiles left: 61    Moves: 1
+     1  2  3  4  5  6  7  8
+ A:           x  x  o  +  x
+ B:  x  x  o  x  x  o  x  +
+ C:  x  o  x  o  o  o  x  x
+ D:  x  o  o  o  o  o  +  +
+ E:  o  o  o  o  x  x  x  +
+ F:  o  +  +  x  x  o  +  o
+ G:  +  +  x  x  +  o  x  x
+ H:  +  o  o  +  +  x  +  x
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 988
+Tiles left: 45    Moves: 2
+     1  2  3  4  5  6  7  8
+ A:                    +  x
+ B:                    x  +
+ C:              x     x  x
+ D:  x     o  x  x     +  +
+ E:  x  x  x  x  x  x  x  +
+ F:  x  +  +  x  x  o  +  o
+ G:  +  +  x  x  +  o  x  x
+ H:  +  o  o  +  +  x  +  x
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 
+Collapse - board 988
+Tiles left: 29    Moves: 3
+     1  2  3  4  5  6  7  8
+ A:                       x
+ B:                    +  +
+ C:                    x  x
+ D:                    x  +
+ E:                    +  +
+ F:     +  o        o  +  o
+ G:  +  +  +     +  o  x  x
+ H:  +  o  o  +  +  x  +  x
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 

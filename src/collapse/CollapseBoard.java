@@ -290,6 +290,32 @@ public class CollapseBoard extends GridBoard<CollapseCell>{
         }
     }
     
+    /**
+     * Getter method for the number of tiles left the player needs to clear
+     * 
+     * @return the number of tiles left the player needs to clear
+     */
+    public int getTilesLeft()
+    {
+        int tilesLeft = 0;
+        
+        /*Iterates through all of the rows on the board*/
+        for (int rowIter = 0; rowIter < getRowCount(); rowIter++)
+        {
+            /*Iterates through all of the columns on the board*/
+            for(int colIter = 0; colIter < getColumnCount(); colIter++)
+            {
+                /*Detrmines if the current column is not empty*/
+                if(board[rowIter][colIter].getState() != CollapsePiece.empty)
+                {
+                    tilesLeft++;
+                }
+            }
+        }
+        
+        return tilesLeft;
+    }
+    
     @Override
     public int getRowCount()
     {

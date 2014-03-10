@@ -6,21 +6,16 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JOptionPane;
 
 import gridgame.GridBoard;
 import gridgame.GridGame;
-import gridgame.GridImages;
 import gridgame.GridStatus;
-import gridgame.Preferences;
-import gridgame.SimpleDialoger;
 
 
 public class CollapseGame extends GridGame {
 
     private CollapseBoard cBoard;
     private CollapseStatus cStatus;
-    private Preferences prefs;
     private int numMoves;
 	
     public CollapseGame(GridBoard board, GridStatus status)
@@ -28,8 +23,7 @@ public class CollapseGame extends GridGame {
         super();
         cBoard = (CollapseBoard)board;
         cStatus = (CollapseStatus)status;
-        prefs = Preferences.getInstance("collapse");
-        dialoger = new CollapseDialoger();
+        
         init();
     }
 	
@@ -50,6 +44,9 @@ public class CollapseGame extends GridGame {
 		cBoard.resetBoard(getGame());
 		numMoves = 0;
 		
+		cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
+	            + numMoves + "\n");
+		
 	}
 
 	@Override
@@ -58,16 +55,35 @@ public class CollapseGame extends GridGame {
 		{
 			cBoard.makeMove(row, col);
 			numMoves++;
+			
+			cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
+		            + numMoves + "\n");
+			
+			
+			setChanged();
+			notifyObservers();
+			
+			if(cBoard.isWin())
+			{
+				String saveTitle = "Game Won Notification";
+				String saveMessage = "Game " + getGame() + " Cleared! \nSave your score? (y/n)";
+				String userInput = dialoger.showInputDialog(saveTitle, saveMessage);
+				
+				if(userInput.toLowerCase().equals("y"))
+				{	
+					saveScore(numMoves);
+				}
+			}
 		}
-		
-		setChanged();
-		notifyObservers();
 	}
 
 	@Override
 	public void restart() {
 		cBoard.resetBoard(getGame());
 		numMoves = 0;
+		
+		cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
+            + numMoves + "\n");
 		
 		setChanged();
 		notifyObservers(getGame());
@@ -78,7 +94,7 @@ public class CollapseGame extends GridGame {
     {
         List<Action> list = new ArrayList<Action>();
         Action restartGame = new RestartAction("Restart");
-        Action newGame = new NewGameAction("New");
+        Action newGame = new NewGameAction("New Game");
         Action selectGame = new SelectGameAction("Select Game");
         Action scores = new ScoresAction("Scores");
         Action cheat = new CheatAction("Cheat");
@@ -130,7 +146,7 @@ public class CollapseGame extends GridGame {
         
         public void actionPerformed(ActionEvent e) 
         {
-        	String prompt = "Enter desired game number (1 - 5000)";
+        	String prompt = "Enter desired game number (1 - 5000):";
         	String title = "Select Game";
         	String userInput = dialoger.showInputDialog(title, prompt);
         	
@@ -139,9 +155,6 @@ public class CollapseGame extends GridGame {
         		int userBoardChoice = Integer.parseInt(userInput);
         		setGame(userBoardChoice);
         		restart();
-        		
-        		setChanged();
-        		notifyObservers(getGame());
         	}
         	catch(NumberFormatException nfe)
         	{
@@ -174,6 +187,9 @@ public class CollapseGame extends GridGame {
         {
         	cBoard.setToCheat();
         	
+    		cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
+    	            + numMoves + "\n");
+        	
         	setChanged();
         	notifyObservers();
         }
@@ -193,34 +209,6 @@ public class CollapseGame extends GridGame {
         	setChanged();
         	notifyObservers();
         }
-    }
-    
-    private class CollapseDialoger implements SimpleDialoger
-    {
-
-		@Override
-		public String showInputDialog(String title, String prompt) {
-            String userInput = JOptionPane.showInputDialog(
-                    null,
-                    prompt,
-                    title,
-                    JOptionPane.QUESTION_MESSAGE
-                );
-            
-            return userInput;
-		}
-
-		@Override
-		public void showMessageDialog(String title, String message) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    message,
-                    title,
-                    JOptionPane.PLAIN_MESSAGE
-                );
-			
-		}
-    	
     }
 
 }

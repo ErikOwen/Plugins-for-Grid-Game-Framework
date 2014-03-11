@@ -1,6 +1,5 @@
 package kaboom;
 
-import collapse.CollapsePiece;
 import gridgame.Renderable;
 
 /**

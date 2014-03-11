@@ -257,6 +257,29 @@ public class KaboomBoard extends GridBoard<KaboomCell>{
         board[0][1].setNumBombsNear(1);
     }
     
+    public boolean boardIsCleared()
+    {
+        boolean boardCleared = true;
+        
+        /*Iterates through all of the rows*/
+        for(int rowIter = 0; rowIter < getRowCount() && boardCleared; rowIter++)
+        {
+            /*Iterates through all of the columns*/
+            for(int colIter = 0; colIter < getColumnCount() && boardCleared;
+                colIter++)
+            {
+                /*Sees if there is a covered cell that is not a bomb*/
+                if(board[rowIter][colIter].getCellState() == 
+                    KaboomPieces.covered && !board[rowIter][colIter].isBomb())
+                {
+                    boardCleared = false;
+                }
+            }
+        }
+        
+        return boardCleared;
+    }
+    
     @Override
     public int getRowCount()
     {

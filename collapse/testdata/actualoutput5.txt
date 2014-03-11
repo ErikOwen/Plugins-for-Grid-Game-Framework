@@ -1,3 +1,17 @@
+Collapse - board 3441
+Tiles left: 64    Moves: 0
+     1  2  3  4  5  6  7  8
+ A:  +  o  x  o  x  o  +  +
+ B:  +  +  +  +  x  x  o  o
+ C:  x  o  o  o  x  x  +  x
+ D:  +  +  x  o  x  x  o  x
+ E:  +  +  o  +  x  x  o  o
+ F:  o  o  o  x  x  +  x  +
+ G:  +  x  o  +  +  +  +  +
+ H:  o  x  x  o  x  x  o  o
+ --------------------------
+1)Restart 2)New Game 3)Select Game 4)Scores 5)Cheat 6)Quit 7)Prefs
+Select Game: Enter desired game number (1 - 5000):
 Collapse - board 2
 Tiles left: 64    Moves: 0
      1  2  3  4  5  6  7  8

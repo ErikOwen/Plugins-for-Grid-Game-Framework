@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.KeyStroke;
 
 import gridgame.GridBoard;
 import gridgame.GridGame;
@@ -69,7 +70,7 @@ public class CollapseGame extends GridGame {
 				String saveMessage = "Game " + getGame() + " Cleared! \nSave your score? (y/n)";
 				String userInput = dialoger.showInputDialog(saveTitle, saveMessage);
 				
-				if(userInput.toLowerCase().equals("y"))
+				if(userInput != null && userInput.toLowerCase().equals("y"))
 				{	
 					saveScore(numMoves);
 				}
@@ -115,6 +116,8 @@ public class CollapseGame extends GridGame {
         public RestartAction(String text)
         {
             super(text);
+            putValue(Action.ACCELERATOR_KEY,
+                    KeyStroke.getKeyStroke('R', ActionEvent.ALT_MASK));
         }
         
         public void actionPerformed(ActionEvent e) 
@@ -128,6 +131,9 @@ public class CollapseGame extends GridGame {
         public NewGameAction(String text)
         {
             super(text);
+            
+            putValue(Action.ACCELERATOR_KEY,
+                    KeyStroke.getKeyStroke('N', ActionEvent.ALT_MASK));
         }
         
         public void actionPerformed(ActionEvent e) 
@@ -142,6 +148,8 @@ public class CollapseGame extends GridGame {
         public SelectGameAction(String text)
         {
             super(text);
+            putValue(Action.ACCELERATOR_KEY,
+                    KeyStroke.getKeyStroke('G', ActionEvent.ALT_MASK));
         }
         
         public void actionPerformed(ActionEvent e) 
@@ -168,6 +176,8 @@ public class CollapseGame extends GridGame {
         public ScoresAction(String text)
         {
             super(text);
+            putValue(Action.ACCELERATOR_KEY,
+                    KeyStroke.getKeyStroke('S', ActionEvent.ALT_MASK));
         }
         
         public void actionPerformed(ActionEvent e) 
@@ -181,6 +191,8 @@ public class CollapseGame extends GridGame {
         public CheatAction(String text)
         {
             super(text);
+            putValue(Action.ACCELERATOR_KEY,
+                    KeyStroke.getKeyStroke('C', ActionEvent.ALT_MASK));
         }
         
         public void actionPerformed(ActionEvent e) 
@@ -200,6 +212,9 @@ public class CollapseGame extends GridGame {
         public QuitAction(String text)
         {
             super(text);
+            
+            putValue(Action.ACCELERATOR_KEY,
+                KeyStroke.getKeyStroke('Q', ActionEvent.ALT_MASK));
         }
         
         public void actionPerformed(ActionEvent e) 

@@ -10,7 +10,6 @@ import java.util.Random;
 public class CollapseBoard extends GridBoard<CollapseCell>{
 	
     private CollapseCell[][] board;
-    private GridCellRenderer renderer;
     private Preferences prefs;
     private int boardNum;
     
@@ -18,7 +17,7 @@ public class CollapseBoard extends GridBoard<CollapseCell>{
     {
         super();
         
-        prefs = prefs.getInstance("collapse");
+        prefs = Preferences.getInstance("collapse");
     }
     
     

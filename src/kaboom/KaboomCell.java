@@ -148,23 +148,23 @@ public class KaboomCell implements Renderable
 	{
 		String textStr = " ";
 		
-		if(cellState == KaboomPieces.covered)
+		if(covered)
 		{
 			textStr = "-";
 		}
-		else if(cellState == KaboomPieces.flagged)
+		else if(flagged)
 		{
 			textStr = "@";
 		}
-		else if(cellState == KaboomPieces.bombHit)
+		else if(!covered && cellState == KaboomPieces.bombHit)
 		{
 			textStr = "*";
 		}
-		else if(cellState == KaboomPieces.bomb)
+		else if(!covered && cellState == KaboomPieces.bomb)
 		{
 			textStr = "B";
 		}
-		else if(getNumBombsNear() > 0)
+		else if(!covered && getNumBombsNear() > 0)
 		{
 			textStr = "" + getNumBombsNear();
 		}
@@ -177,7 +177,15 @@ public class KaboomCell implements Renderable
 	{
 		String stateStr = "";
 		
-		if(cellState != KaboomPieces.empty)
+		if(covered)
+		{
+			stateStr = KaboomPieces.covered.toString();
+		}
+		else if(flagged)
+		{
+			stateStr = KaboomPieces.flagged.toString();
+		}
+		else if(cellState != KaboomPieces.empty)
 		{
 			stateStr = cellState.toString();
 		}

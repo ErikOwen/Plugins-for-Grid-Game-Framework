@@ -32,19 +32,29 @@ public class KaboomGame extends GridGame
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
+		setRandomGame();
+		kBoard.resetBoard(getGame());
+		numMoves = 0;
 		
 	}
 
 	@Override
 	public void makeMove(int row, int col) {
-		// TODO Auto-generated method stub
+		kBoard.takeTurn(row, col);
+		numMoves++;
+		
+		setChanged();
+		notifyObservers();
 		
 	}
 
 	@Override
 	public void restart() {
-		// TODO Auto-generated method stub
+		kBoard.resetBoard(getGame());
+		numMoves = 0;
+		
+		setChanged();
+		notifyObservers();
 		
 	}
 }

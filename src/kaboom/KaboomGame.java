@@ -22,6 +22,7 @@ public class KaboomGame extends GridGame
     private int numMoves, flagCount;
     private TimerLabel timer;
     private JLabel label;
+    private boolean hasWon, hasLost;
 	
     public KaboomGame(GridBoard board, GridStatus status)
     {
@@ -50,6 +51,8 @@ public class KaboomGame extends GridGame
 		kBoard.resetBoard(getGame());
 		numMoves = 0;
 		flagCount = 0;
+		hasWon = false;
+		hasLost = false;
 		
 		timer.restart();
 		label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
@@ -62,8 +65,34 @@ public class KaboomGame extends GridGame
 	public void makeMove(int row, int col) {
 		kBoard.takeTurn(row, col);
 		numMoves++;
-		
 		label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
+		KaboomCell chosenCell = kBoard.getValueAt(row, col);
+		
+        /*Determines if the cell chosen is a bomb*/
+        if(chosenCell.isBomb())
+        {
+            timer.pause();
+            this.hasLost = true;
+            chosenCell.setCellState(KaboomPieces.bombHit);
+            kBoard.setToPeek();
+            
+            dialoger.showMessageDialog("Game Over", "You lost.");
+        }
+        /*Determines if the user has won the baord*/
+        else if(kBoard.boardIsCleared() && !hasWon && !hasLost)
+        {
+        	hasWon = true;
+        	
+			String saveTitle = "Game Won Notification";
+			String saveMessage = "Game " + getGame() + " Cleared! \nSave your score? (y/n)";
+			String userInput = dialoger.showInputDialog(saveTitle, saveMessage);
+			
+			if(userInput != null && userInput.toLowerCase().equals("y"))
+			{	
+				saveScore(timer.getFormattedTime());
+			}
+        	
+        }
 		
 		setChanged();
 		notifyObservers();
@@ -75,6 +104,9 @@ public class KaboomGame extends GridGame
 		kBoard.resetBoard(getGame());
 		numMoves = 0;
 		flagCount = 0;
+		hasWon = false;
+		hasLost = false;
+		
 		timer.restart();
 		
 		label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
@@ -279,7 +311,8 @@ public class KaboomGame extends GridGame
 		   public void actionPerformed(ActionEvent e) 
 		   {
 			   gameOver = true;
-
+			   timer.stop();
+			   
 			   setChanged();
 			   notifyObservers();
 		   }

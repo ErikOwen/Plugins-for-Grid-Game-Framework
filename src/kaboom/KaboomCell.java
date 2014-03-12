@@ -189,6 +189,12 @@ public class KaboomCell implements Renderable
 		{
 			stateStr = cellState.toString();
 		}
+		else if(cellState == KaboomPieces.empty && bombsNear > 0)
+		{
+			String nbsp = "&nbsp;";
+	        stateStr = nbsp + nbsp + nbsp + nbsp +
+	            bombsNear + nbsp + nbsp + nbsp + nbsp;
+		}
 		
 		return stateStr;
 	}

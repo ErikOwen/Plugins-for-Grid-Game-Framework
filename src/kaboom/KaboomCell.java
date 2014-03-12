@@ -148,13 +148,13 @@ public class KaboomCell implements Renderable
 	{
 		String textStr = " ";
 		
-		if(covered)
-		{
-			textStr = "-";
-		}
-		else if(flagged)
+		if(flagged)
 		{
 			textStr = "@";
+		}
+		else if(covered)
+		{
+			textStr = "-";
 		}
 		else if(!covered && cellState == KaboomPieces.bombHit)
 		{

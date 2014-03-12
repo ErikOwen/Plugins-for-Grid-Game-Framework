@@ -21,7 +21,6 @@ public class KaboomGame extends GridGame
     private KaboomStatus kStatus;
     private int numMoves, flagCount;
     private TimerLabel timer;
-    private JLabel label;
     private boolean hasWon, hasLost;
 	
     public KaboomGame(GridBoard board, GridStatus status)
@@ -29,8 +28,7 @@ public class KaboomGame extends GridGame
         super();
         kBoard = (KaboomBoard)board;
         kStatus = (KaboomStatus)status;
-        timer = new TimerLabel();
-        label = new JLabel();
+        timer = kStatus.getTimer();
         
         init();
     }
@@ -55,8 +53,7 @@ public class KaboomGame extends GridGame
 		hasLost = false;
 		
 		timer.restart();
-		label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
-		kStatus.add(label);
+		kStatus.setLabelText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
 		kStatus.add(timer);
 		
 	}
@@ -65,8 +62,11 @@ public class KaboomGame extends GridGame
 	public void makeMove(int row, int col) {
 		kBoard.takeTurn(row, col);
 		numMoves++;
-		label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
+		kStatus.setLabelText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
 		KaboomCell chosenCell = kBoard.getValueAt(row, col);
+		
+		setChanged();
+		notifyObservers();
 		
         /*Determines if the cell chosen is a bomb*/
         if(chosenCell.isBomb())
@@ -84,7 +84,7 @@ public class KaboomGame extends GridGame
         	hasWon = true;
         	
 			String saveTitle = "Game Won Notification";
-			String saveMessage = "Game " + getGame() + " Cleared! \nSave your score? (y/n)";
+			String saveMessage = "Game " + getGame() + " Cleared! \nSave your time of " + timer.getFormattedTime()  + "? (y/n)";
 			String userInput = dialoger.showInputDialog(saveTitle, saveMessage);
 			
 			if(userInput != null && userInput.toLowerCase().equals("y"))
@@ -93,9 +93,6 @@ public class KaboomGame extends GridGame
 			}
         	
         }
-		
-		setChanged();
-		notifyObservers();
 		
 	}
 
@@ -109,7 +106,7 @@ public class KaboomGame extends GridGame
 		
 		timer.restart();
 		
-		label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
+		kStatus.setLabelText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
 		
 		setChanged();
 		notifyObservers(getGame());
@@ -137,7 +134,7 @@ public class KaboomGame extends GridGame
             flaggedCell.setUnflagged();
         }
         
-        label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
+        kStatus.setLabelText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
         
         setChanged();
         notifyObservers();
@@ -147,8 +144,8 @@ public class KaboomGame extends GridGame
 	{
 		List<Action> list = new ArrayList<Action>();
 		Action restartGame = new RestartAction("Restart");
-		Action newGame = new NewGameAction("New Game");
-		Action selectGame = new SelectGameAction("Select Game");
+		Action newGame = new NewGameAction("New");
+		Action selectGame = new SelectGameAction("Select");
 		Action scores = new ScoresAction("Scores");
 		Action peek = new PeekAction("Peek");
 		Action cheat = new CheatAction("Cheat");
@@ -255,7 +252,7 @@ public class KaboomGame extends GridGame
 		   {
 			   kBoard.setToPeek();
 			   
-			   label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
+			   kStatus.setLabelText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
 			   
 			   setChanged();
 			   notifyObservers();
@@ -275,7 +272,7 @@ public class KaboomGame extends GridGame
 		   {
 			   kBoard.setToCheat();
 
-			   label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
+			   kStatus.setLabelText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
 
 			   setChanged();
 			   notifyObservers();

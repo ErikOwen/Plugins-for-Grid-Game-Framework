@@ -1,7 +1,6 @@
 package collapse;
 
 import gridgame.GridBoard;
-import gridgame.GridCellRenderer;
 import gridgame.Preferences;
 import java.awt.Point;
 import java.util.LinkedList;

@@ -19,7 +19,7 @@ public class CollapseGame extends GridGame {
     private CollapseStatus cStatus;
     private int numMoves;
 	
-    public CollapseGame(GridBoard board, GridStatus status)
+    public CollapseGame(GridBoard<CollapseCell> board, GridStatus status)
     {
         super();
         cBoard = (CollapseBoard)board;
@@ -30,7 +30,7 @@ public class CollapseGame extends GridGame {
 	
 	
 	@Override
-	public GridBoard getBoardToView() {
+	public GridBoard<CollapseCell> getBoardToView() {
 		return cBoard;
 	}
 
@@ -166,7 +166,7 @@ public class CollapseGame extends GridGame {
         	}
         	catch(NumberFormatException nfe)
         	{
-        		title = title;
+        		title += "";
         	}
         }
     }

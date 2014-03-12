@@ -1,7 +1,5 @@
 package kaboom;
 
-import java.util.Timer;
-
 import javax.swing.JLabel;
 
 import gridgame.GridStatus;

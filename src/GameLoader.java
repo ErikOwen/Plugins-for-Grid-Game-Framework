@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 
 public final class GameLoader extends Object
@@ -39,10 +40,10 @@ public final class GameLoader extends Object
 			
 			try
 			{
-				Class curClass = Class.forName(gameName.toLowerCase() + "." + gameName + classNames[ndx]);
-				Constructor curConstr = curClass.getConstructor();
+				Class<?> curClass = Class.forName(gameName.toLowerCase() + "." + gameName + classNames[ndx]);
+				Constructor<?> curConstr = curClass.getConstructor();
 				curParams = new Object [] {};
-				GridBoard board = (GridBoard)curConstr.newInstance(curParams);
+				GridBoard<?> board = (GridBoard<?>)curConstr.newInstance(curParams);
 			    
 				curClass = Class.forName(gameName.toLowerCase() + "." + gameName + classNames[++ndx]);
 				curConstr = curClass.getConstructor();
@@ -97,7 +98,19 @@ public final class GameLoader extends Object
 			{
 				System.err.println("No constructor found for " + gameName + classNames[++ndx] + " with an argument list of size " + curParams.length + ".");
 		    }
-			catch(Exception e)
+			catch (InstantiationException e)
+			{
+				e.printStackTrace();
+			}
+			catch (IllegalAccessException e)
+			{
+				e.printStackTrace();
+			}
+			catch (IllegalArgumentException e)
+			{
+				e.printStackTrace();
+			}
+			catch (InvocationTargetException e)
 			{
 				e.printStackTrace();
 			}

@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 
 import gridgame.GridBoard;
@@ -23,7 +22,7 @@ public class KaboomGame extends GridGame
     private TimerLabel timer;
     private boolean hasWon, hasLost;
 	
-    public KaboomGame(GridBoard board, GridStatus status)
+    public KaboomGame(GridBoard<KaboomCell> board, GridStatus status)
     {
         super();
         kBoard = (KaboomBoard)board;
@@ -34,7 +33,7 @@ public class KaboomGame extends GridGame
     }
 
 	@Override
-	public GridBoard getBoardToView() {
+	public GridBoard<KaboomCell> getBoardToView() {
 		return kBoard;
 	}
 
@@ -219,7 +218,7 @@ public class KaboomGame extends GridGame
 			   }
 			   catch(NumberFormatException nfe)
 			   {
-				   title = title;
+				   title += "";
 			   }
 		   }
 	   }

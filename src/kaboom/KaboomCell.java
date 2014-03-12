@@ -177,13 +177,13 @@ public class KaboomCell implements Renderable
 	{
 		String stateStr = "";
 		
-		if(covered)
-		{
-			stateStr = KaboomPieces.covered.toString();
-		}
-		else if(flagged)
+		if(flagged)
 		{
 			stateStr = KaboomPieces.flagged.toString();
+		}
+		else if(covered)
+		{
+			stateStr = KaboomPieces.covered.toString();
 		}
 		else if(cellState != KaboomPieces.empty)
 		{

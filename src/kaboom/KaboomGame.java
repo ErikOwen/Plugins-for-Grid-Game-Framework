@@ -6,24 +6,30 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 
 import gridgame.GridBoard;
 import gridgame.GridGame;
 import gridgame.GridStatus;
+import gridgame.TimerLabel;
 
 public class KaboomGame extends GridGame
 {
 
     private KaboomBoard kBoard;
     private KaboomStatus kStatus;
-    private int numMoves;
+    private int numMoves, flagCount;
+    private TimerLabel timer;
+    private JLabel label;
 	
     public KaboomGame(GridBoard board, GridStatus status)
     {
         super();
         kBoard = (KaboomBoard)board;
         kStatus = (KaboomStatus)status;
+        timer = new TimerLabel();
+        label = new JLabel();
         
         init();
     }
@@ -43,6 +49,12 @@ public class KaboomGame extends GridGame
 		setRandomGame();
 		kBoard.resetBoard(getGame());
 		numMoves = 0;
+		flagCount = 0;
+		
+		timer.restart();
+		label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
+		kStatus.add(label);
+		kStatus.add(timer);
 		
 	}
 
@@ -50,6 +62,8 @@ public class KaboomGame extends GridGame
 	public void makeMove(int row, int col) {
 		kBoard.takeTurn(row, col);
 		numMoves++;
+		
+		label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
 		
 		setChanged();
 		notifyObservers();
@@ -60,35 +74,66 @@ public class KaboomGame extends GridGame
 	public void restart() {
 		kBoard.resetBoard(getGame());
 		numMoves = 0;
+		flagCount = 0;
+		timer.restart();
+		
+		label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
 		
 		setChanged();
-		notifyObservers();
+		notifyObservers(getGame());
 		
 	}
 	
-	   public List<Action> getMenuActions()
-	    {
-	        List<Action> list = new ArrayList<Action>();
-	        Action restartGame = new RestartAction("Restart");
-	        Action newGame = new NewGameAction("New Game");
-	        Action selectGame = new SelectGameAction("Select Game");
-	        Action scores = new ScoresAction("Scores");
-	        Action peek = new PeekAction("Peek");
-	        Action cheat = new CheatAction("Cheat");
-	        Action about = new AboutAction("About");
-	        Action quit = new QuitAction("Quit");
-	        
-	        list.add(restartGame);
-	        list.add(newGame);
-	        list.add(selectGame);
-	        list.add(scores);
-	        list.add(peek);
-	        list.add(cheat);
-	        list.add(about);
-	        list.add(quit);
-	        
-	        return list;
-	    }
+	@Override
+	public void handleRightClick(int row, int col)
+	{
+        KaboomCell flaggedCell = kBoard.getValueAt(row, col);
+        
+        /*Determines if the cell has already been flagged*/
+        if(!flaggedCell.isFlagged())
+        {
+            /*Determines if the cell is flag-eligible*/
+            if(flaggedCell.getCellState()  == KaboomPieces.covered)
+            {
+                flagCount++;
+                flaggedCell.setFlagged();
+            }
+        }
+        else
+        {
+            flagCount--;
+            flaggedCell.setUnflagged();
+        }
+        
+        label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
+        
+        setChanged();
+        notifyObservers();
+	}
+	
+	public List<Action> getMenuActions()
+	{
+		List<Action> list = new ArrayList<Action>();
+		Action restartGame = new RestartAction("Restart");
+		Action newGame = new NewGameAction("New Game");
+		Action selectGame = new SelectGameAction("Select Game");
+		Action scores = new ScoresAction("Scores");
+		Action peek = new PeekAction("Peek");
+		Action cheat = new CheatAction("Cheat");
+		Action about = new AboutAction("About");
+		Action quit = new QuitAction("Quit");
+
+		list.add(restartGame);
+		list.add(newGame);
+		list.add(selectGame);
+		list.add(scores);
+		list.add(peek);
+		list.add(cheat);
+		list.add(about);
+		list.add(quit);
+
+		return list;
+	}
 		
 	   private class RestartAction extends AbstractAction
 	   {
@@ -178,6 +223,8 @@ public class KaboomGame extends GridGame
 		   {
 			   kBoard.setToPeek();
 			   
+			   label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
+			   
 			   setChanged();
 			   notifyObservers();
 		   }
@@ -196,8 +243,7 @@ public class KaboomGame extends GridGame
 		   {
 			   kBoard.setToCheat();
 
-//			   kStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
-//					   + numMoves + "\n");
+			   label.setText("Moves: " + numMoves + "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
 
 			   setChanged();
 			   notifyObservers();

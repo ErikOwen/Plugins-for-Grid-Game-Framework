@@ -2,10 +2,20 @@ package collapse;
 
 import gridgame.GridStatus;
 
-public class CollapseStatus extends GridStatus {
+/**
+ * Class which represents the status bar for the Collapse plugin
+ * 
+ * @author erikowen
+ * @version 1
+ */
+public class CollapseStatus extends GridStatus
+{
 
-	public CollapseStatus()
-	{
-		super();
-	}
+    /**
+     * Constructor to create a CollapseStatus object
+     */
+    public CollapseStatus()
+    {
+        super();
+    }
 }

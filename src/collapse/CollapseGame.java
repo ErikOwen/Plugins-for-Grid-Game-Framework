@@ -12,13 +12,25 @@ import gridgame.GridBoard;
 import gridgame.GridGame;
 import gridgame.GridStatus;
 
-
-public class CollapseGame extends GridGame {
+/**
+ * Class which represents the game logic for the Collapse plugin
+ * 
+ * @author erikowen
+ * @version 1
+ */
+public class CollapseGame extends GridGame
+{
 
     private CollapseBoard cBoard;
     private CollapseStatus cStatus;
     private int numMoves;
-	
+    
+    /**
+     * Constructor to create a CollapseGame object
+     * 
+     * @param board the board to use for this game
+     * @param status the status to use for this game
+     */
     public CollapseGame(GridBoard<CollapseCell> board, GridStatus status)
     {
         super();
@@ -27,70 +39,105 @@ public class CollapseGame extends GridGame {
         
         init();
     }
-	
-	
-	@Override
-	public GridBoard<CollapseCell> getBoardToView() {
-		return cBoard;
-	}
+    
+    /**
+     * Accessor method to get the CollapseBoard
+     * 
+     * @return the CollapseBoard being used in this game
+     */
+    @Override
+    public CollapseBoard getBoardToView()
+    {
+        return cBoard;
+    }
 
-	@Override
-	public GridStatus getStatusToView() {
-		return cStatus;
-	}
+    /**
+     * Accessor method to get the Collapse status
+     * 
+     * @return the CollapseStatus used in this game
+     */
+    @Override
+    public CollapseStatus getStatusToView()
+    {
+        return cStatus;
+    }
 
-	@Override
-	public void init() {
-		setRandomGame();
-		cBoard.resetBoard(getGame());
-		numMoves = 0;
-		
-		cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
-	            + numMoves + "\n");
-		
-	}
+    /**
+     * Sets up this CollapseGame
+     */
+    @Override
+    public void init()
+    {
+        setRandomGame();
+        cBoard.resetBoard(getGame());
+        numMoves = 0;
+        
+        cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
+                + numMoves + "\n");
+        
+    }
 
-	@Override
-	public void makeMove(int row, int col) {
-		if(cBoard.getValueAt(row, col).getState() != CollapsePiece.empty)
-		{
-			cBoard.makeMove(row, col);
-			numMoves++;
-			
-			cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
-		            + numMoves + "\n");
-			
-			
-			setChanged();
-			notifyObservers();
-			
-			if(cBoard.isWin())
-			{
-				String saveTitle = "Game Won Notification";
-				String saveMessage = "Game " + getGame() + " Cleared! \nSave your score? (y/n)";
-				String userInput = dialoger.showInputDialog(saveTitle, saveMessage);
-				
-				if(userInput != null && userInput.toLowerCase().equals("y"))
-				{	
-					saveScore(numMoves);
-				}
-			}
-		}
-	}
+    /**
+     * Makes a move on the CollapseBoard
+     * 
+     * @param row the row to make a move in
+     * @param col the column to make a move in
+     */
+    @Override
+    public void makeMove(int row, int col)
+    {
+        /*Determines if the chosen cell is empty*/
+        if(cBoard.getValueAt(row, col).getState() != CollapsePiece.empty)
+        {
+            cBoard.makeMove(row, col);
+            numMoves++;
+            
+            cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
+                    + numMoves + "\n");
+            
+            
+            setChanged();
+            notifyObservers();
+            
+            /*Determines if the board has been won*/
+            if(cBoard.isWin())
+            {
+                String saveTitle = "Game Won Notification";
+                String saveMessage = "Game " + getGame() +
+                    " Cleared! \nSave your score? (y/n)";
+                String userInput = dialoger.showInputDialog(saveTitle, saveMessage);
+                
+                /*Determines if the user wants to save their score*/
+                if(userInput != null && userInput.toLowerCase().equals("y"))
+                {   
+                    saveScore(numMoves);
+                }
+            }
+        }
+    }
 
-	@Override
-	public void restart() {
-		cBoard.resetBoard(getGame());
-		numMoves = 0;
-		
-		cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
+    /**
+     * Restarts the board being used
+     */
+    @Override
+    public void restart()
+    {
+        cBoard.resetBoard(getGame());
+        numMoves = 0;
+        
+        cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
             + numMoves + "\n");
-		
-		setChanged();
-		notifyObservers(getGame());
-		
-	}
-	
+        
+        setChanged();
+        notifyObservers(getGame());
+        
+    }
+    
+    /**
+     * Gets the menu actions for this game
+     * 
+     * @return the list of menu actions
+     */
     public List<Action> getMenuActions()
     {
         List<Action> list = new ArrayList<Action>();
@@ -110,7 +157,10 @@ public class CollapseGame extends GridGame {
         
         return list;
     }
-	
+    
+    /**
+     * Action for the menu which restarts the current game
+     */
     private class RestartAction extends AbstractAction
     {
         public RestartAction(String text)
@@ -122,10 +172,13 @@ public class CollapseGame extends GridGame {
         
         public void actionPerformed(ActionEvent e) 
         {
-        	restart();
+            restart();
         }
     }
     
+    /**
+     * Action for the menu which goes to the next game
+     */
     private class NewGameAction extends AbstractAction
     {
         public NewGameAction(String text)
@@ -138,11 +191,14 @@ public class CollapseGame extends GridGame {
         
         public void actionPerformed(ActionEvent e) 
         {
-        	incrementGame();
-        	restart();
+            incrementGame();
+            restart();
         }
     }
     
+    /**
+     * Action for the menu which selects a game to be played
+     */
     private class SelectGameAction extends AbstractAction
     {
         public SelectGameAction(String text)
@@ -154,23 +210,26 @@ public class CollapseGame extends GridGame {
         
         public void actionPerformed(ActionEvent e) 
         {
-        	String prompt = "Enter desired game number (1 - 5000):";
-        	String title = "Select Game";
-        	String userInput = dialoger.showInputDialog(title, prompt);
-        	
-        	try
-        	{
-        		int userBoardChoice = Integer.parseInt(userInput);
-        		setGame(userBoardChoice);
-        		restart();
-        	}
-        	catch(NumberFormatException nfe)
-        	{
-        		title += "";
-        	}
+            String prompt = "Enter desired game number (1 - 5000):";
+            String title = "Select Game";
+            String userInput = dialoger.showInputDialog(title, prompt);
+            
+            try
+            {
+                int userBoardChoice = Integer.parseInt(userInput);
+                setGame(userBoardChoice);
+                restart();
+            }
+            catch(NumberFormatException nfe)
+            {
+                title += "";
+            }
         }
     }
     
+    /**
+     * Action for the menu which displays the high scores
+     */
     private class ScoresAction extends AbstractAction
     {
         public ScoresAction(String text)
@@ -182,10 +241,13 @@ public class CollapseGame extends GridGame {
         
         public void actionPerformed(ActionEvent e) 
         {
-        	showHighScores();
+            showHighScores();
         }
     }
     
+    /**
+     * Action for the menu which sets the board to cheat
+     */
     private class CheatAction extends AbstractAction
     {
         public CheatAction(String text)
@@ -197,16 +259,19 @@ public class CollapseGame extends GridGame {
         
         public void actionPerformed(ActionEvent e) 
         {
-        	cBoard.setToCheat();
-        	
-    		cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
-    	            + numMoves + "\n");
-        	
-        	setChanged();
-        	notifyObservers();
+            cBoard.setToCheat();
+            
+            cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
+                    + numMoves + "\n");
+            
+            setChanged();
+            notifyObservers();
         }
     }
     
+    /**
+     * Action for the menu which quits the game
+     */
     private class QuitAction extends AbstractAction
     {
         public QuitAction(String text)
@@ -219,10 +284,10 @@ public class CollapseGame extends GridGame {
         
         public void actionPerformed(ActionEvent e) 
         {
-        	gameOver = true;
-        	
-        	setChanged();
-        	notifyObservers();
+            gameOver = true;
+            
+            setChanged();
+            notifyObservers();
         }
     }
 

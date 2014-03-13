@@ -5,12 +5,22 @@ import java.util.Random;
 import gridgame.GridBoard;
 import gridgame.Preferences;
 
-public class KaboomBoard extends GridBoard<KaboomCell>{
+/**
+ * Class which represents the board for the Kaboom plugin
+ * 
+ * @author erikowen
+ * @version 1
+ */
+public class KaboomBoard extends GridBoard<KaboomCell>
+{
 
     private KaboomCell[][] board;
     private Preferences prefs;
     private int boardSize, difficulty, boardNum, numBombs;
     
+    /**
+     * Constuctor to make a KaboomBoard object
+     */
     public KaboomBoard()
     {
         super();
@@ -18,14 +28,19 @@ public class KaboomBoard extends GridBoard<KaboomCell>{
         prefs = Preferences.getInstance("kaboom");
     }
     
+    /**
+     * Resets the board to the specified boardNumber
+     * 
+     * @param boardNumber to set this board to
+     */
     public void resetBoard(int boardNumber)
     {
-    	boardNum = boardNumber;
-    	boardSize = Integer.parseInt(prefs.get("Board Size"));
-    	difficulty = Integer.parseInt(prefs.get("Difficulty"));
-    	numBombs = 0;
-    	board = new KaboomCell[boardSize][boardSize];
-    	int numGeneratedBombs = (boardSize * boardSize) / difficulty;
+        boardNum = boardNumber;
+        boardSize = Integer.parseInt(prefs.get("Board Size"));
+        difficulty = Integer.parseInt(prefs.get("Difficulty"));
+        numBombs = 0;
+        board = new KaboomCell[boardSize][boardSize];
+        int numGeneratedBombs = (boardSize * boardSize) / difficulty;
         Random generator = new Random(boardNum);
         
         /*Iterates through all of the bombs and adds them to the board*/
@@ -127,6 +142,12 @@ public class KaboomBoard extends GridBoard<KaboomCell>{
         return numBombs;
     }
     
+    /**
+     * Takes a turn on this board
+     * 
+     * @param row the row of the cell chosen to take turn at
+     * @param col the column of the cell chosen to take turn at
+     */
     public void takeTurn(int row, int col)
     {
         //this.numMoves++;
@@ -136,12 +157,13 @@ public class KaboomBoard extends GridBoard<KaboomCell>{
         /*Determines if the cell chosen is a bomb*/
         if(chosenCell.isBomb())
         {
-        	chosenCell.setCellState(KaboomPieces.bombHit);
-        	setToPeek();
+            chosenCell.setCellState(KaboomPieces.bombHit);
+            setToPeek();
         }
+        /*Determines if there are any bombs near this cell*/
         else if(chosenCell.getNumBombsNear() == 0)
         {   
-        	uncoverNeighboringEmptyCells(row, col);  
+            uncoverNeighboringEmptyCells(row, col);  
         }
     }
     
@@ -257,6 +279,11 @@ public class KaboomBoard extends GridBoard<KaboomCell>{
         board[0][1].setNumBombsNear(1);
     }
     
+    /**
+     * Determines if this board has been won
+     * 
+     * @return true if board is cleared, false otherwise.
+     */
     public boolean boardIsCleared()
     {
         boolean boardCleared = true;
@@ -280,21 +307,39 @@ public class KaboomBoard extends GridBoard<KaboomCell>{
         return boardCleared;
     }
     
+    /**
+     * Gets the number of rows in this board
+     * 
+     * @return int the number of rows in this board
+     */
     @Override
     public int getRowCount()
     {
-    	return board.length;
+        return board.length;
     }
-    
+
+    /**
+     * Gets the number of columns in this board
+     * 
+     * @return int the number of columns in this board
+     */
     @Override
     public int getColumnCount()
     {
-    	return board[0].length;
+        return board[0].length;
     }
     
+    /**
+     * Accessor method to get the cell at the specified coordinates
+     * 
+     * @param row the row coordinate
+     * @param col the column coordinate
+     * 
+     * @return the KaboomCell at the specified coordinates
+     */
     @Override
     public KaboomCell getValueAt(int row, int col)
     {
-    	return board[row][col];
+        return board[row][col];
     }
 }

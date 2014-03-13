@@ -143,59 +143,79 @@ public class KaboomCell implements Renderable
         return this.col;
     }
 
-	@Override
-	public String getText()
-	{
-		String textStr = " ";
-		
-		if(flagged)
-		{
-			textStr = "@";
-		}
-		else if(covered)
-		{
-			textStr = "-";
-		}
-		else if(!covered && cellState == KaboomPieces.bombHit)
-		{
-			textStr = "*";
-		}
-		else if(!covered && cellState == KaboomPieces.bomb)
-		{
-			textStr = "B";
-		}
-		else if(!covered && getNumBombsNear() > 0)
-		{
-			textStr = "" + getNumBombsNear();
-		}
-		
-		return textStr;
-	}
-	
-	@Override
-	public String toString()
-	{
-		String stateStr = "";
-		
-		if(flagged)
-		{
-			stateStr = KaboomPieces.flagged.toString();
-		}
-		else if(covered)
-		{
-			stateStr = KaboomPieces.covered.toString();
-		}
-		else if(cellState != KaboomPieces.empty)
-		{
-			stateStr = cellState.toString();
-		}
-		else if(cellState == KaboomPieces.empty && bombsNear > 0)
-		{
-			String nbsp = "&nbsp;";
-	        stateStr = nbsp + nbsp + nbsp + nbsp +
-	            bombsNear + nbsp + nbsp + nbsp + nbsp;
-		}
-		
-		return stateStr;
-	}
+    /**
+     * Returns the textual representation of this cell
+     * 
+     * @return the text representation of this cell
+     */
+    @Override
+    public String getText()
+    {
+        String textStr = " ";
+        
+        /*Determins if the cell is flagged*/
+        if(flagged)
+        {
+            textStr = "@";
+        }
+        /*Determins if the cell is covered*/
+        else if(covered)
+        {
+            textStr = "-";
+        }
+        /*Determins if the cell is a bomb that has been hit*/
+        else if(!covered && cellState == KaboomPieces.bombHit)
+        {
+            textStr = "*";
+        }
+        /*Determins if the cell is a bomb*/
+        else if(!covered && cellState == KaboomPieces.bomb)
+        {
+            textStr = "B";
+        }
+        /*Determins if the cell has bombs near it*/
+        else if(!covered && getNumBombsNear() > 0)
+        {
+            textStr = "" + getNumBombsNear();
+        }
+        
+        return textStr;
+    }
+    
+    /**
+     * Method which allows the framework to determine which image
+     * should be displayed for this cell
+     * 
+     * @return the string representation of this image.
+     */
+    @Override
+    public String toString()
+    {
+        String stateStr = "";
+        
+        /*Determins if the cell is flagged*/
+        if(flagged)
+        {
+            stateStr = KaboomPieces.flagged.toString();
+        }
+        /*Determins if the cell is covered*/
+        else if(covered)
+        {
+            stateStr = KaboomPieces.covered.toString();
+        }
+        /*Determins if the cell is not empty*/
+        else if(cellState != KaboomPieces.empty)
+        {
+            stateStr = cellState.toString();
+        }
+        /*Determins if the cell is empty and has bombs near it*/
+        else if(cellState == KaboomPieces.empty && bombsNear > 0)
+        {
+            String nbsp = "&nbsp;";
+            stateStr = nbsp + nbsp + nbsp + nbsp +
+                bombsNear + nbsp + nbsp + nbsp + nbsp;
+        }
+        
+        return stateStr;
+    }
 }

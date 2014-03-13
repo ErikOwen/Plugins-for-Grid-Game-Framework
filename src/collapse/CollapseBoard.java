@@ -6,12 +6,22 @@ import java.awt.Point;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class CollapseBoard extends GridBoard<CollapseCell>{
-	
+/**
+ * Class which represents the collapse board
+ * 
+ * @author erikowen
+ * @version 1
+ */
+public class CollapseBoard extends GridBoard<CollapseCell>
+{
+    
     private CollapseCell[][] board;
     private Preferences prefs;
     private int boardNum;
     
+    /**
+     * Constructor to instaniaet a CollapseBoard
+     */
     public CollapseBoard()
     {
         super();
@@ -20,11 +30,16 @@ public class CollapseBoard extends GridBoard<CollapseCell>{
     }
     
     
-    
+    /**
+     * Resets the board to the specified board number
+     * 
+     * @param boardNumber the specified board number to switch the board to
+     */
     public void resetBoard(int boardNumber)
     {
-    	final int boardSize = Integer.parseInt(prefs.get("Board Size"));
-        CollapsePiece[] pieces = {CollapsePiece.green, CollapsePiece.purple, CollapsePiece.red};
+        final int boardSize = Integer.parseInt(prefs.get("Board Size"));
+        CollapsePiece[] pieces = {CollapsePiece.green, CollapsePiece.purple,
+            CollapsePiece.red};
         board = new CollapseCell[boardSize][boardSize];
         boardNum = boardNumber;
         Random generator = new Random(boardNum);
@@ -35,49 +50,70 @@ public class CollapseBoard extends GridBoard<CollapseCell>{
             /*Iterates through each column on the board*/
             for (int col = 0; col < getColumnCount(); col++)
             {
-                board[row][col] = new CollapseCell(pieces[generator.nextInt(pieces.length)]);
+                board[row][col] = new CollapseCell(
+                    pieces[generator.nextInt(pieces.length)]);
             }
         }
     }
     
+    /**
+     * Clears the specified cell by the row and column coordinates
+     * 
+     * @param row the specified row
+     * @param col the specified column
+     */
     public void clearCell(int row, int col)
     {
-    	board[row][col].setToEmpty();
+        board[row][col].setToEmpty();
     }
     
+    /**
+     * Determines if the board has been won or not
+     * 
+     * @return boolean if the board has been cleared
+     */
     public boolean isWin()
     {
-    	boolean gameIsWon = true;
-    	
-    	for(int row = 0; row < getRowCount() && gameIsWon; row++)
-    	{
-    		for(int col = 0; col < getColumnCount() && gameIsWon; col++)
-    		{
-    			if(board[row][col].getState() != CollapsePiece.empty)
-    			{
-    				gameIsWon = false;
-    			}
-    		}
-    	}
-    	
-    	return gameIsWon;
+        boolean gameIsWon = true;
+        
+        /*Iterates through all of the board's row*/
+        for(int row = 0; row < getRowCount() && gameIsWon; row++)
+        {
+            /*Iterates through all of the board's columns*/
+            for(int col = 0; col < getColumnCount() && gameIsWon; col++)
+            {
+                /*Determiens if the current piece is empty or not*/
+                if(board[row][col].getState() != CollapsePiece.empty)
+                {
+                    gameIsWon = false;
+                }
+            }
+        }
+        
+        return gameIsWon;
     }
     
+    /**
+     * Makes a move on the board
+     * 
+     * @param row coordinate to make the move at
+     * @param col coordinate to the make the move out
+     */
     public void makeMove(int row, int col)
     {
         /*Checks to see if current position is not empty*/
         if(board[row][col].getState() != CollapsePiece.empty)
         {
-        	/*Determines if the tile chosen has a(n) adjacent tile(s)*/
-        	if(hasAdjacentTiles(row, col))
-        	{
-        		//Removes cell and all adjacent tiles of the same color
-        		removeSelection(row, col);
-        		//Shifts the necesssary cells downwards to fill in blank spots
-        		shiftCellsDownwards();
-        		//Shifts the columns to the center if necessary
-        		shiftColumnsToCenter();
-        	}
+            /*Determines if the tile chosen has a(n) adjacent tile(s)*/
+            if(hasAdjacentTiles(row, col))
+            {
+                //Removes cell and all adjacent tiles of the same color
+                removeSelection(row, col);
+                //Shifts the necesssary cells downwards to fill in blank spots
+                shiftCellsDownwards();
+                //Shifts the columns to the center if necessary
+                shiftColumnsToCenter();
+            }
         }
     }
     
@@ -272,6 +308,9 @@ public class CollapseBoard extends GridBoard<CollapseCell>{
         return isEmpty;
     }
     
+    /**
+     * Sets the board to the cheat formation
+     */
     public void setToCheat()
     {
         /*Iterates through all of the rows of the current board*/
@@ -314,22 +353,40 @@ public class CollapseBoard extends GridBoard<CollapseCell>{
         return tilesLeft;
     }
     
+    /**
+     * Accessor method to get the number of rows in this board
+     * 
+     * @return int the number of rows in this board
+     */
     @Override
     public int getRowCount()
     {
-    	return board.length;
+        return board.length;
     }
     
+    /**
+     * Accessor method to get the number of columns in this board
+     * 
+     * @return int the number of columns in this board
+     */
     @Override
     public int getColumnCount()
     {
-    	return board[0].length;
+        return board[0].length;
     }
     
+    /**
+     * Accessor method to get the value at the specified coordinates
+     * 
+     * @param row the specified row to find the cell
+     * @param col the specified column to find the cell
+     * 
+     * @return the CollapseCell at this position
+     */
     @Override
     public CollapseCell getValueAt(int row, int col)
     {
-    	return board[row][col];
+        return board[row][col];
     }
 
 }

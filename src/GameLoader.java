@@ -84,23 +84,13 @@ public final class GameLoader extends Object
             }
             catch(NoSuchMethodException nsm)
             {
-                System.err.println("No constructor found for " + args[0] +
-                    classType + " with an argument list of size " +
-                    params.length + ".");
+                System.err.println("No constructor found for " + args[0] + classType
+                    + " with an argument list of size " +  params.length + ".");
             }
-            catch (InvocationTargetException e)
+            catch (Exception e)
             {
                 e.printStackTrace();
             }
-            catch (InstantiationException e)
-            {
-                e.printStackTrace();
-            }
-            catch (IllegalAccessException e)
-            {
-                e.printStackTrace();
-            }
-            
         }
         else
         {

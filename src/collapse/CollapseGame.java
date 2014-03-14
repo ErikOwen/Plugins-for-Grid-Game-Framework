@@ -176,7 +176,7 @@ public class CollapseGame extends GridGame
         {
             super(text);
             putValue(Action.ACCELERATOR_KEY,
-               KeyStroke.getKeyStroke('R', ActionEvent.ALT_MASK));
+                KeyStroke.getKeyStroke('R', ActionEvent.ALT_MASK));
         }
         
         @Override

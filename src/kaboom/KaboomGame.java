@@ -208,14 +208,14 @@ public class KaboomGame extends GridGame
     public List<Action> getMenuActions()
     {
         List<Action> list = new ArrayList<Action>();
-        Action restartGame = new RestartAction("Restart");
-        Action newGame = new NewGameAction("New");
-        Action selectGame = new SelectGameAction("Select");
-        Action scores = new ScoresAction("Scores");
-        Action peek = new PeekAction("Peek");
-        Action cheat = new CheatAction("Cheat");
-        Action about = new AboutAction("About");
-        Action quit = new QuitAction("Quit");
+        Action restartGame = new KaboomRestartAction("Restart", this);
+        Action newGame = new KaboomNewGameAction("New", this);
+        Action selectGame = new KaboomSelectGameAction("Select", this);
+        Action scores = new KaboomScoresAction("Scores", this);
+        Action peek = new KaboomPeekAction("Peek", this);
+        Action cheat = new KaboomCheatAction("Cheat", this);
+        Action about = new KaboomAboutAction("About", this);
+        Action quit = new KaboomQuitAction("Quit", this);
 
         list.add(restartGame);
         list.add(newGame);
@@ -230,31 +230,35 @@ public class KaboomGame extends GridGame
     }
     
     /**
-     * Menu option which restarts the game
+     * Menu option which restarts a Kaboom game
      */
-    private class RestartAction extends AbstractAction
+    private class KaboomRestartAction extends AbstractAction
     {
-        public RestartAction(String text)
+        private KaboomGame game;
+        public KaboomRestartAction(String text, KaboomGame kGame)
         {
             super(text);
+            game = kGame;
             putValue(Action.ACCELERATOR_KEY,
                 KeyStroke.getKeyStroke('R', ActionEvent.ALT_MASK));
         }
 
         public void actionPerformed(ActionEvent e) 
         {
-            restart();
+            game.restart();
         }
     }
 
     /**
-     * Menu option which starts a new game
+     * Menu option which starts a new Kaboom game
      */
-    private class NewGameAction extends AbstractAction
+    private class KaboomNewGameAction extends AbstractAction
     {
-        public NewGameAction(String text)
+        private KaboomGame game;
+        public KaboomNewGameAction(String text, KaboomGame kGame)
         {
             super(text);
+            game = kGame;
 
             putValue(Action.ACCELERATOR_KEY,
                 KeyStroke.getKeyStroke('N', ActionEvent.ALT_MASK));
@@ -262,28 +266,29 @@ public class KaboomGame extends GridGame
 
         public void actionPerformed(ActionEvent e) 
         {
-            incrementGame();
-            restart();
+            game.incrementGame();
+            game.restart();
         }
     }
 
     /**
-     * Menu option which selects a game
+     * Menu option which selects a Kaboom game
      */
-    private class SelectGameAction extends AbstractAction
+    private class KaboomSelectGameAction extends AbstractAction
     {
-        public SelectGameAction(String text)
+        private KaboomGame game;
+        public KaboomSelectGameAction(String text, KaboomGame kGame)
         {
             super(text);
+            game = kGame;
             putValue(Action.ACCELERATOR_KEY,
                 KeyStroke.getKeyStroke('G', ActionEvent.ALT_MASK));
         }
 
-        public void actionPerformed(ActionEvent e) 
+        public void actionPerformed(ActionEvent event) 
         {
-            String prompt = "Enter desired game number (1 - 5000):";
-            String title = "Select Game";
-            String userInput = dialoger.showInputDialog(title, prompt);
+            String userInput = dialoger.showInputDialog("Select Game",
+                "Enter desired game number (1 - 5000):");
 
             try
             {
@@ -291,122 +296,126 @@ public class KaboomGame extends GridGame
                 /*Determines if selected board is in the valid range*/
                 if(userBoardChoice > 0 && userBoardChoice <= kTotalNumBoards)
                 {
-                    setGame(userBoardChoice);
-                    restart();
+                    game.setGame(userBoardChoice);
+                    game.restart();
                 }
             }
-            catch(NumberFormatException nfe)
+            catch(NumberFormatException numFmtException)
             {
-                title += "";
+                System.out.print("");
             }
         }
     }
 
     /**
-     * Menu option which show the high scores
+     * Menu option which show the high scores for the Kaboom game
      */
-    private class ScoresAction extends AbstractAction
+    private class KaboomScoresAction extends AbstractAction
     {
-        public ScoresAction(String text)
+        private KaboomGame game;
+        public KaboomScoresAction(String textStr, KaboomGame kGame)
         {
-            super(text);
+            super(textStr);
+            game = kGame;
             putValue(Action.ACCELERATOR_KEY,
                 KeyStroke.getKeyStroke('S', ActionEvent.ALT_MASK));
         }
 
-        public void actionPerformed(ActionEvent e) 
+        public void actionPerformed(ActionEvent event) 
         {
-            showHighScores();
+            game.showHighScores();
         }
     }
 
     /**
-     * Menu option which sets the game to peek
+     * Menu option which sets the Kaboom game to peek
      */
-    private class PeekAction extends AbstractAction
+    private class KaboomPeekAction extends AbstractAction
     {
-        public PeekAction(String text)
+        private KaboomGame game;
+        public KaboomPeekAction(String textStr, KaboomGame kGame)
         {
-            super(text);
+            super(textStr);
+            game = kGame;
             putValue(Action.ACCELERATOR_KEY,
                 KeyStroke.getKeyStroke('P', ActionEvent.ALT_MASK));
         }
 
-        public void actionPerformed(ActionEvent e) 
+        public void actionPerformed(ActionEvent event) 
         {
-            kBoard.setToPeek();
+            game.getBoardToView().setToPeek();
+            game.getStatusToView().setLabelText("Moves: " + numMoves +
+                "   Flags: " + flagCount + "/" + kBoard.getNumBombs() + "  ");
                
-            kStatus.setLabelText("Moves: " + numMoves + "   Flags: " + flagCount
-                + "/" + kBoard.getNumBombs() + "  ");
-               
-            setChanged();
-            notifyObservers();
+            game.setChanged();
+            game.notifyObservers();
         }
     }
 
     /**
-     * Menu option which sets the game to cheat mode
+     * Menu option which sets the Kaboom game to cheat mode
      */
-    private class CheatAction extends AbstractAction
+    private class KaboomCheatAction extends AbstractAction
     {
-        public CheatAction(String text)
+        private KaboomGame game;
+        public KaboomCheatAction(String textStr, KaboomGame kGame)
         {
-            super(text);
+            super(textStr);
+            game = kGame;
             putValue(Action.ACCELERATOR_KEY,
                 KeyStroke.getKeyStroke('C', ActionEvent.ALT_MASK));
         }
 
         public void actionPerformed(ActionEvent e) 
         {
-            kBoard.setToCheat();
-
-            kStatus.setLabelText("Moves: " + numMoves + "   Flags: " + flagCount
-                + "/" + kBoard.getNumBombs() + "  ");
-
-            setChanged();
-            notifyObservers();
+            game.getBoardToView().setToCheat();
+            game.getStatusToView().setLabelText("Moves: " + numMoves + "   Flags: "
+                + flagCount + "/" + kBoard.getNumBombs() + "  ");
+            game.setChanged();
+            game.notifyObservers();
         }
     }
 
     /**
-     * Menu option which shows the about dialog
+     * Menu option which shows the Kaboom game's about dialog
      */
-    private class AboutAction extends AbstractAction
+    private class KaboomAboutAction extends AbstractAction
     {
-        public AboutAction(String text)
+        private KaboomGame game;
+        public KaboomAboutAction(String textStr, KaboomGame kGame)
         {
-            super(text);
-
+            super(textStr);
+            game = kGame;
             putValue(Action.ACCELERATOR_KEY,
                 KeyStroke.getKeyStroke('A', ActionEvent.ALT_MASK));
         }
 
         public void actionPerformed(ActionEvent e) 
         {
-            dialoger.showMessageDialog("About", "Kaboom Game by Erik Owen");
+            game.dialoger.showMessageDialog("About", "Kaboom Game by Erik Owen");
         }
     }
     
     /**
-     * Menu option which quits the game
+     * Menu option which quits the Kaboom game
      */
-    private class QuitAction extends AbstractAction
+    private class KaboomQuitAction extends AbstractAction
     {
-        public QuitAction(String text)
+        private KaboomGame game;
+        public KaboomQuitAction(String textStr, KaboomGame kGame)
         {
-            super(text);
-
+            super(textStr);
+            game = kGame;
             putValue(Action.ACCELERATOR_KEY,
                 KeyStroke.getKeyStroke('Q', ActionEvent.ALT_MASK));
         }
 
         public void actionPerformed(ActionEvent e) 
         {
-            gameOver = true;
+            game.gameOver = true;
             timer.stop();
-               
-            setChanged();
-            notifyObservers();
+            game.setChanged();
+            game.notifyObservers();
         }
     }
 }

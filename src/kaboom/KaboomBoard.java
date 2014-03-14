@@ -57,7 +57,7 @@ public class KaboomBoard extends GridBoard<KaboomCell>
             /*Checks if the current spot doesn't have a bomb on it yet*/
             if(grid[curRow][curCol] == null)
             {
-            	grid[curRow][curCol] = new KaboomCell(KaboomPieces.bomb, 
+                grid[curRow][curCol] = new KaboomCell(KaboomPieces.bomb, 
                     curRow, curCol);
                 this.numBombs++;
             }

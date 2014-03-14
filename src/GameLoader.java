@@ -67,15 +67,7 @@ public final class GameLoader extends Object
                 params = new Object[]{board, status};
                 GridGame game = (GridGame) curConstr.newInstance(params);
 
-                app = createView(args, game);
-                setIOSources(app, args);
-                
-                game.setDialoger(app.getDialoger());
-                game.init();
-                
-                app.createUI();
-                game.addObserver(app);
-                app.setVisible(true);
+                startGame(app, game, args);
             }
             catch(ClassNotFoundException cnf)
             {
@@ -130,6 +122,20 @@ public final class GameLoader extends Object
         }
         
         return app;
+    }
+    
+    private void startGame(GridView app, GridGame game, String [] args) throws
+        IOException
+    {
+        app = createView(args, game);
+        setIOSources(app, args);
+        
+        game.setDialoger(app.getDialoger());
+        game.init();
+        
+        app.createUI();
+        game.addObserver(app);
+        app.setVisible(true);
     }
     
     /**

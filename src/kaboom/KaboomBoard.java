@@ -85,7 +85,7 @@ public class KaboomBoard extends GridBoard<KaboomCell>
      */
     private void setCellState(int row, int col)
     {
-    	grid[row][col] = new KaboomCell(KaboomPieces.empty, row, col);
+        grid[row][col] = new KaboomCell(KaboomPieces.empty, row, col);
         int numBombsNear = 0;
         int[] rowDirections = {-1, 0, 1};
         int[] colDirections = {-1, 0, 1};
@@ -238,7 +238,7 @@ public class KaboomBoard extends GridBoard<KaboomCell>
                         }
                         else
                         {
-                        	grid[row + rDir][col + cDir].setUncovered();
+                            grid[row + rDir][col + cDir].setUncovered();
                         }
                     }
                 }
@@ -257,7 +257,7 @@ public class KaboomBoard extends GridBoard<KaboomCell>
             /*Iterates through all of the columns*/
             for(int colIter = 0; colIter < getColumnCount(); colIter++)
             {
-            	grid[rowIter][colIter].setUncovered();
+                grid[rowIter][colIter].setUncovered();
             }
         }
     }
@@ -273,9 +273,9 @@ public class KaboomBoard extends GridBoard<KaboomCell>
             /*Iterates through all of the columns*/
             for(int colIter = 0; colIter < getColumnCount(); colIter++)
             {
-            	grid[rowIter][colIter] = new KaboomCell(KaboomPieces.empty, 
+                grid[rowIter][colIter] = new KaboomCell(KaboomPieces.empty, 
                     rowIter, colIter);
-            	grid[rowIter][colIter].setUncovered();
+                grid[rowIter][colIter].setUncovered();
             }
         }
         

@@ -12,7 +12,7 @@ public class CollapseBoardTest extends TestCase {
 	{
 		CollapseBoard board = new CollapseBoard();
 		
-		board.resetBoard(0);
+		board.resetBoard(0, 8);
 		
 		for(int row = 0; row < board.getRowCount(); row++)
 		{
@@ -52,7 +52,7 @@ public class CollapseBoardTest extends TestCase {
 	public void testWin()
 	{
 		CollapseBoard board = new CollapseBoard();
-		board.resetBoard(2);
+		board.resetBoard(2, 8);
 		assertEquals(64, board.getTilesLeft());
 		board.makeMove(7, 4);
 		board.makeMove(7, 4);
@@ -69,7 +69,7 @@ public class CollapseBoardTest extends TestCase {
 		assertTrue(board.isWin());
 		assertEquals(0, board.getTilesLeft());
 		
-		board.resetBoard(1);
+		board.resetBoard(1, 8);
 		board.makeMove(1, 1);
 		board.makeMove(2, 2);
 		board.makeMove(3, 3);

@@ -33,11 +33,15 @@ public class KaboomBoard extends GridBoard<KaboomCell>
      * 
      * @param boardNumber to set this board to
      */
-    public void resetBoard(int boardNumber)
+    public void resetBoard(int boardNumber, int size, int diff)
     {
         boardNum = boardNumber;
-        boardSize = Integer.parseInt(prefs.get("Board Size"));
-        difficulty = Integer.parseInt(prefs.get("Difficulty"));
+        //boardSize = Integer.parseInt(prefs.get("Board Size"));
+        //difficulty = Integer.parseInt(prefs.get("Difficulty"));
+        
+        boardSize = size;
+        difficulty = diff;
+        
         numBombs = 0;
         board = new KaboomCell[boardSize][boardSize];
         int numGeneratedBombs = (boardSize * boardSize) / difficulty;

@@ -35,9 +35,8 @@ public class CollapseBoard extends GridBoard<CollapseCell>
      * 
      * @param boardNumber the specified board number to switch the board to
      */
-    public void resetBoard(int boardNumber)
+    public void resetBoard(int boardNumber, int boardSize)
     {
-        final int boardSize = Integer.parseInt(prefs.get("Board Size"));
         CollapsePiece[] pieces = {CollapsePiece.green, CollapsePiece.purple,
             CollapsePiece.red};
         board = new CollapseCell[boardSize][boardSize];

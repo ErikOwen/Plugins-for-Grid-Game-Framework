@@ -43,6 +43,9 @@ public class KaboomGame extends GridGame
         kStatus = (KaboomStatus)status;
         timer = kStatus.getTimer();
         
+        myPrefs = Preferences.getInstance("kaboom");
+        myPrefs.loadPreferences();
+        
         init();
     }
 
@@ -75,9 +78,10 @@ public class KaboomGame extends GridGame
     public void init()
     {
         setRandomGame();
-//        myPrefs = Preferences.getInstance("kaboom");
         
-        kBoard.resetBoard(getGame());
+        int size = Integer.parseInt(myPrefs.get("Board Size"));
+        int difficulty = Integer.parseInt(myPrefs.get("Difficulty"));
+        kBoard.resetBoard(getGame(), size, difficulty);
         numMoves = 0;
         flagCount = 0;
         hasWon = false;
@@ -144,7 +148,9 @@ public class KaboomGame extends GridGame
     @Override
     public void restart()
     {
-        kBoard.resetBoard(getGame());
+        int size = Integer.parseInt(myPrefs.get("Board Size"));
+        int difficulty = Integer.parseInt(myPrefs.get("Difficulty"));
+        kBoard.resetBoard(getGame(), size, difficulty);
         numMoves = 0;
         flagCount = 0;
         hasWon = false;

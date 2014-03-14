@@ -13,15 +13,14 @@ public class GameLoaderTest extends TestCase {
 	
 	public void testMultipleRuns()
 	{
-		GameLoader loader = new GameLoader();
 		String [] collapseArgs = new String [] {"Collapse", "Console",
 		    "collapse/testdata/testInput1.txt", "collapse/testdata/actualOutput1.txt"};
 		String [] kaboomArgs = new String [] {"Kaboom", "Console",
 	    	"kaboom/testdata/testInput1.txt", "kaboom/testdata/actualOutput1.txt"};
 		try
 		{
-			loader.loadGame(collapseArgs);
-			loader.loadGame(kaboomArgs);
+			GameLoader.main(kaboomArgs);
+			GameLoader.main(collapseArgs);
 		}
 		catch (Exception e) {
 

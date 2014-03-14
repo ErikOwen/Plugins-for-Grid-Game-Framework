@@ -39,6 +39,9 @@ public class CollapseGame extends GridGame
         cBoard = (CollapseBoard)board;
         cStatus = (CollapseStatus)status;
         
+        myPrefs = Preferences.getInstance("collapse");
+        myPrefs.loadPreferences();
+        
         init();
     }
     
@@ -71,8 +74,10 @@ public class CollapseGame extends GridGame
     public void init()
     {
         setRandomGame();
-//        myPrefs = Preferences.getInstance("collapse");
-        cBoard.resetBoard(getGame());
+        
+        int boardSize = Integer.parseInt(myPrefs.get("Board Size"));
+        
+        cBoard.resetBoard(getGame(), boardSize);
         numMoves = 0;
         
         cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "
@@ -125,7 +130,8 @@ public class CollapseGame extends GridGame
     @Override
     public void restart()
     {
-        cBoard.resetBoard(getGame());
+        int boardSize = Integer.parseInt(myPrefs.get("Board Size"));
+        cBoard.resetBoard(getGame(), boardSize);
         numMoves = 0;
         
         cStatus.setLabelText("Tiles left: " + cBoard.getTilesLeft() + "    Moves: "

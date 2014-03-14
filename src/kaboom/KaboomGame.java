@@ -288,10 +288,11 @@ public class KaboomGame extends GridGame
             try
             {
                 int userBoardChoice = Integer.parseInt(userInput);
+                /*Determines if selected board is in the valid range*/
                 if(userBoardChoice > 0 && userBoardChoice <= kTotalNumBoards)
                 {
-                	setGame(userBoardChoice);
-                	restart();
+                    setGame(userBoardChoice);
+                    restart();
                 }
             }
             catch(NumberFormatException nfe)

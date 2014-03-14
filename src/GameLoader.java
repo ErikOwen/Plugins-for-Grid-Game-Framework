@@ -24,6 +24,8 @@ import java.lang.reflect.InvocationTargetException;
  */
 public final class GameLoader extends Object
 {
+    private static final int kTwoArgs = 2, kFourArgs = 4, kInputFile = 2,
+    kOutputFile = 3;
 
     /**
      * Constructor to build GameLoader object
@@ -36,21 +38,21 @@ public final class GameLoader extends Object
      * Dynamically runs the GridGame plugin based on the arguments provided.
      * @param args the arguments for the game
      */
-    public void loadGame(String [] args) throws FileNotFoundException, IOException
+    public void loadGame(String [] args) throws IOException
     {
-    	GridView app = null;
-    	Object [] params = null;
-    	String classType = "";
-    	
+        GridView app = null;
+        Object [] params = new Object [] {};
+        String classType = "";
+        
         /*Determines if there is a correct number of program arguments*/
-        if(args.length == 2 || args.length == 4)
+        if(args.length == kTwoArgs || args.length == kFourArgs)
         {
             try
             {
-            	classType = "Board";
-                Class curClass = Class.forName(args[0].toLowerCase()
-                        + "." + args[0] + classType);
-                GridBoard board = (GridBoard)curClass.newInstance();
+                classType = "Board";
+                Class<?> curClass = Class.forName(args[0].toLowerCase()
+                    + "." + args[0] + classType);
+                GridBoard<?> board = (GridBoard<?>)curClass.newInstance();
                 
                 classType = "Status";
                 curClass = Class.forName(args[0].toLowerCase() + "."
@@ -59,12 +61,13 @@ public final class GameLoader extends Object
                 
                 classType = "Game";
                 curClass = Class.forName(args[0].toLowerCase() + "." +
-                		args[0] + classType);
-                Constructor curConstr = curClass.getConstructor(GridBoard.class, GridStatus.class);
+                    args[0] + classType);
+                Constructor<?> curConstr = curClass.getConstructor(GridBoard.class,
+                    GridStatus.class);
                 params = new Object[]{board, status};
                 GridGame game = (GridGame) curConstr.newInstance(params);
-            	
-            	app = createView(args, game);
+
+                app = createView(args, game);
                 setIOSources(app, args);
                 
                 game.setDialoger(app.getDialoger());
@@ -76,8 +79,8 @@ public final class GameLoader extends Object
             }
             catch(ClassNotFoundException cnf)
             {
-                System.err.println("Unable to find a class named " +
-                		args[0] + classType + " in the CLASSPATH.");
+                System.err.println("Unable to find a class named '" +
+                     args[0] + classType + "' in the CLASSPATH.");
             }
             catch(NoSuchMethodException nsm)
             {
@@ -91,12 +94,12 @@ public final class GameLoader extends Object
             }
             catch (InstantiationException e)
             {
-				e.printStackTrace();
-			}
+                e.printStackTrace();
+            }
             catch (IllegalAccessException e)
             {
-				e.printStackTrace();
-			}
+                e.printStackTrace();
+            }
             
         }
         else
@@ -105,13 +108,13 @@ public final class GameLoader extends Object
         }
     }
     
-    private void setIOSources(GridView app, String [] args) throws FileNotFoundException, IOException
+    private void setIOSources(GridView app, String [] args) throws IOException
     {
         /*Determines if user wants to specify input / output file*/
-        if(args.length == 4)
+        if(args.length == kFourArgs)
         {
-            File input = new File(args[2]);
-            app.setIOsources(new FileReader(input), new FileWriter(args[3]));
+            File input = new File(args[kInputFile]);
+            app.setIOsources(new FileReader(input), new FileWriter(args[kOutputFile]));
             
         }
         else
@@ -123,14 +126,14 @@ public final class GameLoader extends Object
     
     private GridView createView(String [] args, GridGame game)
     {
-    	GridView app = null;
+        GridView app = null;
         /*Determines if the GUI interface should be instantiated*/
         if(args[1].equals("GUI"))
         {
             app = new GridGUI(args[0], game);
             
         }
-        /*Determines if console interace should be instantiated*/
+        /*Determines if console interface should be instantiated*/
         else if(args[1].equals("Console"))
         {
             app = new GridConsole(args[0], game);
@@ -144,9 +147,9 @@ public final class GameLoader extends Object
      * 
      * @param args command line arguments
      */
-    public static void main(String [] args) throws FileNotFoundException, IOException
+    public static void main(String [] args) throws IOException
     {
-    	GameLoader loader = new GameLoader();
-    	loader.loadGame(args);
+        GameLoader loader = new GameLoader();
+        loader.loadGame(args);
     }
 }

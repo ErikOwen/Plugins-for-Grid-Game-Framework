@@ -14,7 +14,6 @@ import gridgame.Preferences;
 public class KaboomBoard extends GridBoard<KaboomCell>
 {
 
-    private KaboomCell[][] board;
     private Preferences prefs;
     private int boardSize, difficulty, boardNum, numBombs;
     
@@ -32,6 +31,8 @@ public class KaboomBoard extends GridBoard<KaboomCell>
      * Resets the board to the specified boardNumber
      * 
      * @param boardNumber to set this board to
+     * @param size the size of the board to be set
+     * @param diff the difficulty to make the game
      */
     public void resetBoard(int boardNumber, int size, int diff)
     {
@@ -43,7 +44,7 @@ public class KaboomBoard extends GridBoard<KaboomCell>
         difficulty = diff;
         
         numBombs = 0;
-        board = new KaboomCell[boardSize][boardSize];
+        grid = new KaboomCell[boardSize][boardSize];
         int numGeneratedBombs = (boardSize * boardSize) / difficulty;
         Random generator = new Random(boardNum);
         
@@ -54,9 +55,9 @@ public class KaboomBoard extends GridBoard<KaboomCell>
             int curCol = generator.nextInt(boardSize);
             
             /*Checks if the current spot doesn't have a bomb on it yet*/
-            if(board[curRow][curCol] == null)
+            if(grid[curRow][curCol] == null)
             {
-                board[curRow][curCol] = new KaboomCell(KaboomPieces.bomb, 
+            	grid[curRow][curCol] = new KaboomCell(KaboomPieces.bomb, 
                     curRow, curCol);
                 this.numBombs++;
             }
@@ -69,7 +70,7 @@ public class KaboomBoard extends GridBoard<KaboomCell>
             for(int colIter = 0; colIter < getColumnCount(); colIter++)
             {
                 /*sets the cell state if spot is empty*/
-                if(board[rowIter][colIter] == null)
+                if(grid[rowIter][colIter] == null)
                 {
                     setCellState(rowIter, colIter);
                 }
@@ -84,7 +85,7 @@ public class KaboomBoard extends GridBoard<KaboomCell>
      */
     private void setCellState(int row, int col)
     {
-        board[row][col] = new KaboomCell(KaboomPieces.empty, row, col);
+    	grid[row][col] = new KaboomCell(KaboomPieces.empty, row, col);
         int numBombsNear = 0;
         int[] rowDirections = {-1, 0, 1};
         int[] colDirections = {-1, 0, 1};
@@ -99,7 +100,7 @@ public class KaboomBoard extends GridBoard<KaboomCell>
             }
         }
         
-        board[row][col].setNumBombsNear(numBombsNear);
+        grid[row][col].setNumBombsNear(numBombsNear);
     }
     
     /**
@@ -125,8 +126,8 @@ public class KaboomBoard extends GridBoard<KaboomCell>
                 if(col + cDir >= 0 && col + cDir < getColumnCount())
                 {
                     /*Sees if spot being checked is a bomb or not*/
-                    if(board[row + rDir][col + cDir] != null && 
-                        board[row + rDir][col + cDir].isBomb())
+                    if(grid[row + rDir][col + cDir] != null && 
+                        grid[row + rDir][col + cDir].isBomb())
                     {
                         retVal = 1;
                     }
@@ -224,20 +225,20 @@ public class KaboomBoard extends GridBoard<KaboomCell>
                 if(col + cDir >= 0 && col + cDir < getColumnCount())
                 {
                     /*Determines if current spot is covered and not a bomb*/
-                    if(board[row + rDir][col + cDir] != null && board[row + 
+                    if(grid[row + rDir][col + cDir] != null && grid[row + 
                         rDir][col + cDir].getCellState() == 
-                        KaboomPieces.covered && !board[row + rDir][col + 
+                        KaboomPieces.covered && !grid[row + rDir][col + 
                         cDir].isBomb())
                     {
                         /*Checks to see if current spot is also empty*/
-                        if(board[row + rDir][col + cDir].getNumBombsNear() == 0)
+                        if(grid[row + rDir][col + cDir].getNumBombsNear() == 0)
                         {
-                            queue.add((KaboomCell)board[row + rDir]
+                            queue.add((KaboomCell)grid[row + rDir]
                                 [col + cDir]);
                         }
                         else
                         {
-                            board[row + rDir][col + cDir].setUncovered();
+                        	grid[row + rDir][col + cDir].setUncovered();
                         }
                     }
                 }
@@ -256,7 +257,7 @@ public class KaboomBoard extends GridBoard<KaboomCell>
             /*Iterates through all of the columns*/
             for(int colIter = 0; colIter < getColumnCount(); colIter++)
             {
-                board[rowIter][colIter].setUncovered();
+            	grid[rowIter][colIter].setUncovered();
             }
         }
     }
@@ -272,15 +273,15 @@ public class KaboomBoard extends GridBoard<KaboomCell>
             /*Iterates through all of the columns*/
             for(int colIter = 0; colIter < getColumnCount(); colIter++)
             {
-                board[rowIter][colIter] = new KaboomCell(KaboomPieces.empty, 
+            	grid[rowIter][colIter] = new KaboomCell(KaboomPieces.empty, 
                     rowIter, colIter);
-                board[rowIter][colIter].setUncovered();
+            	grid[rowIter][colIter].setUncovered();
             }
         }
         
-        board[0][0] = new KaboomCell(KaboomPieces.bomb, 0, 0);
-        board[0][1] = new KaboomCell(KaboomPieces.empty, 0, 1);
-        board[0][1].setNumBombsNear(1);
+        grid[0][0] = new KaboomCell(KaboomPieces.bomb, 0, 0);
+        grid[0][1] = new KaboomCell(KaboomPieces.empty, 0, 1);
+        grid[0][1].setNumBombsNear(1);
     }
     
     /**
@@ -300,8 +301,8 @@ public class KaboomBoard extends GridBoard<KaboomCell>
                 colIter++)
             {
                 /*Sees if there is a covered cell that is not a bomb*/
-                if(board[rowIter][colIter].getCellState() == 
-                    KaboomPieces.covered && !board[rowIter][colIter].isBomb())
+                if(grid[rowIter][colIter].getCellState() == 
+                    KaboomPieces.covered && !grid[rowIter][colIter].isBomb())
                 {
                     boardCleared = false;
                 }
@@ -311,27 +312,6 @@ public class KaboomBoard extends GridBoard<KaboomCell>
         return boardCleared;
     }
     
-    /**
-     * Gets the number of rows in this board
-     * 
-     * @return int the number of rows in this board
-     */
-    @Override
-    public int getRowCount()
-    {
-        return board.length;
-    }
-
-    /**
-     * Gets the number of columns in this board
-     * 
-     * @return int the number of columns in this board
-     */
-    @Override
-    public int getColumnCount()
-    {
-        return board[0].length;
-    }
     
     /**
      * Accessor method to get the cell at the specified coordinates
@@ -344,6 +324,6 @@ public class KaboomBoard extends GridBoard<KaboomCell>
     @Override
     public KaboomCell getValueAt(int row, int col)
     {
-        return board[row][col];
+        return grid[row][col];
     }
 }

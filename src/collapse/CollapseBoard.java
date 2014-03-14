@@ -15,7 +15,6 @@ import java.util.Random;
 public class CollapseBoard extends GridBoard<CollapseCell>
 {
     
-    private CollapseCell[][] board;
     private Preferences prefs;
     private int boardNum;
     
@@ -34,12 +33,13 @@ public class CollapseBoard extends GridBoard<CollapseCell>
      * Resets the board to the specified board number
      * 
      * @param boardNumber the specified board number to switch the board to
+     * @param boardSize the size of the board to reset to
      */
     public void resetBoard(int boardNumber, int boardSize)
     {
         CollapsePiece[] pieces = {CollapsePiece.green, CollapsePiece.purple,
             CollapsePiece.red};
-        board = new CollapseCell[boardSize][boardSize];
+        grid = new CollapseCell[boardSize][boardSize];
         boardNum = boardNumber;
         Random generator = new Random(boardNum);
         
@@ -49,7 +49,7 @@ public class CollapseBoard extends GridBoard<CollapseCell>
             /*Iterates through each column on the board*/
             for (int col = 0; col < getColumnCount(); col++)
             {
-                board[row][col] = new CollapseCell(
+                grid[row][col] = new CollapseCell(
                     pieces[generator.nextInt(pieces.length)]);
             }
         }
@@ -71,7 +71,7 @@ public class CollapseBoard extends GridBoard<CollapseCell>
             for(int col = 0; col < getColumnCount() && gameIsWon; col++)
             {
                 /*Determiens if the current piece is empty or not*/
-                if(board[row][col].getState() != CollapsePiece.empty)
+                if(grid[row][col].getState() != CollapsePiece.empty)
                 {
                     gameIsWon = false;
                 }
@@ -90,7 +90,7 @@ public class CollapseBoard extends GridBoard<CollapseCell>
     public void makeMove(int row, int col)
     {
         /*Checks to see if current position is not empty*/
-        if(board[row][col].getState() != CollapsePiece.empty)
+        if(grid[row][col].getState() != CollapsePiece.empty)
         {
             /*Determines if the tile chosen has a(n) adjacent tile(s)*/
             if(hasAdjacentTiles(row, col))
@@ -108,28 +108,28 @@ public class CollapseBoard extends GridBoard<CollapseCell>
     private boolean hasAdjacentTiles(int row, int col)
     {
         boolean hasAdjacentTiles = false;
-        CollapsePiece color = board[row][col].getState();
+        CollapsePiece color = grid[row][col].getState();
         
         /*Only checks for adjacent tiles if tile is not empty*/
         if(color != CollapsePiece.empty)
         {
             /*Looks above the current tile to see if it there is the same tile type*/
-            if(row > 0 && board[row - 1][col].getState() == color)
+            if(row > 0 && grid[row - 1][col].getState() == color)
             {
                 hasAdjacentTiles = true;
             }
             /*Looks below the current tile to see if it there is the same tile type*/
-            if(row < getRowCount() - 1 && board[row + 1][col].getState() == color)
+            if(row < getRowCount() - 1 && grid[row + 1][col].getState() == color)
             {
                 hasAdjacentTiles = true;
             }
             /*Looks right of the current tile to see if it there is the same tile type*/
-            if(col > 0 && board[row][col - 1].getState() == color)
+            if(col > 0 && grid[row][col - 1].getState() == color)
             {
                 hasAdjacentTiles = true;   
             }
             /*Looks left of the current tile to see if it there is the same tile type*/
-            if(col < getColumnCount() - 1 && board[row][col + 1].getState() == color)
+            if(col < getColumnCount() - 1 && grid[row][col + 1].getState() == color)
             {
                 hasAdjacentTiles = true;
             }
@@ -143,7 +143,7 @@ public class CollapseBoard extends GridBoard<CollapseCell>
      */
     private void removeSelection(int rowPos, int colPos)
     {
-        CollapsePiece curColor = board[rowPos][colPos].getState();
+        CollapsePiece curColor = grid[rowPos][colPos].getState();
         Point curSpot;
         LinkedList<Point> queue = new LinkedList<Point>();
         queue.add(new Point(rowPos, colPos));
@@ -154,14 +154,14 @@ public class CollapseBoard extends GridBoard<CollapseCell>
             curSpot = queue.remove();
             
             /*Add the below tile to the queue if it is the same color*/
-            if(curSpot.getX() < getRowCount() - 1 && board[
+            if(curSpot.getX() < getRowCount() - 1 && grid[
                 (int) (curSpot.getX() + 1)][(int)curSpot.getY()].getState()
                     == curColor)
             {
                 queue.add(new Point((int)curSpot.getX() + 1, (int)curSpot.getY()));
             }
             /*Add the above tile to the queue if it is the same color*/
-            if(curSpot.getX() > 0 && board[(int) (curSpot.getX()
+            if(curSpot.getX() > 0 && grid[(int) (curSpot.getX()
                 - 1)][(int) curSpot.getY()].getState() == curColor)
             {
                 queue.add(new Point((int)curSpot.getX() - 1,
@@ -169,19 +169,19 @@ public class CollapseBoard extends GridBoard<CollapseCell>
             }
             /*Add the tile to the right to the queue if it is the same color*/
             if(curSpot.getY() < getColumnCount() - 1 &&
-                board[(int)curSpot.getX()][(int)curSpot.getY() + 1].getState()
+                grid[(int)curSpot.getX()][(int)curSpot.getY() + 1].getState()
                     == curColor)
             {
                 queue.add(new Point((int)curSpot.getX(), (int)curSpot.getY() + 1));
             }
             /*Add the tile to the left to the queue if it is the same color*/
-            if(curSpot.getY() > 0 && board[(int)curSpot.getX()]
+            if(curSpot.getY() > 0 && grid[(int)curSpot.getX()]
                 [(int)curSpot.getY() - 1].getState() == curColor)
             {
                 queue.add(new Point((int)curSpot.getX(), (int)curSpot.getY() - 1));
             }
             
-            board[(int)curSpot.getX()][(int)curSpot.getY()].setToEmpty();
+            grid[(int)curSpot.getX()][(int)curSpot.getY()].setToEmpty();
         }
     }
     
@@ -198,20 +198,20 @@ public class CollapseBoard extends GridBoard<CollapseCell>
             {
                 //If the current position is not empty and has an empty spot
                 //below it, then slide the tile down to correct position
-                if(board[rowIter][colIter].getState() != CollapsePiece.empty &&
-                    board[rowIter + 1][colIter].getState() == CollapsePiece.empty)
+                if(grid[rowIter][colIter].getState() != CollapsePiece.empty &&
+                    grid[rowIter + 1][colIter].getState() == CollapsePiece.empty)
                 {
                     int curSpot = rowIter + 1;
                     
                     /*Slides the tile down until it is above the tile or on the bottom*/
-                    while(curSpot < getRowCount() - 1 && board
+                    while(curSpot < getRowCount() - 1 && grid
                         [curSpot + 1][colIter].getState() == CollapsePiece.empty)
                     {
                         curSpot++;
                     }
                     
-                    board[curSpot][colIter] = board[rowIter][colIter];
-                    board[rowIter][colIter] = new CollapseCell(CollapsePiece.empty);
+                    grid[curSpot][colIter] = grid[rowIter][colIter];
+                    grid[rowIter][colIter] = new CollapseCell(CollapsePiece.empty);
                 }
 
             }
@@ -267,8 +267,8 @@ public class CollapseBoard extends GridBoard<CollapseCell>
                 /*Shifts the column and makes the old spot empty*/
                 for(int rowIter = 0; rowIter < getRowCount(); rowIter++)
                 {
-                    board[rowIter][ndx] = board[rowIter][curCol];
-                    board[rowIter][curCol] = new CollapseCell(CollapsePiece.empty);
+                    grid[rowIter][ndx] = grid[rowIter][curCol];
+                    grid[rowIter][curCol] = new CollapseCell(CollapsePiece.empty);
                 }
             }
         }
@@ -287,7 +287,7 @@ public class CollapseBoard extends GridBoard<CollapseCell>
         for(int rowIter = 0; rowIter < getRowCount() && isEmpty; rowIter++)
         {
             /*Determines if the current position is not empty*/
-            if(board[rowIter][column].getState() != CollapsePiece.empty)
+            if(grid[rowIter][column].getState() != CollapsePiece.empty)
             {
                 isEmpty = false;
             }
@@ -307,11 +307,11 @@ public class CollapseBoard extends GridBoard<CollapseCell>
             /*Iterates throug all of the columns of the current board*/
             for(int colIter = 0; colIter < getColumnCount(); colIter++)
             {          
-                board[rowIter][colIter] = new CollapseCell(CollapsePiece.empty);
+                grid[rowIter][colIter] = new CollapseCell(CollapsePiece.empty);
             }
         
-            board[0][0] = new CollapseCell(CollapsePiece.green);
-            board[0][1] = new CollapseCell(CollapsePiece.green);  
+            grid[0][0] = new CollapseCell(CollapsePiece.green);
+            grid[0][1] = new CollapseCell(CollapsePiece.green);  
         }
     }
     
@@ -331,7 +331,7 @@ public class CollapseBoard extends GridBoard<CollapseCell>
             for(int colIter = 0; colIter < getColumnCount(); colIter++)
             {
                 /*Detrmines if the current column is not empty*/
-                if(board[rowIter][colIter].getState() != CollapsePiece.empty)
+                if(grid[rowIter][colIter].getState() != CollapsePiece.empty)
                 {
                     tilesLeft++;
                 }
@@ -339,28 +339,6 @@ public class CollapseBoard extends GridBoard<CollapseCell>
         }
         
         return tilesLeft;
-    }
-    
-    /**
-     * Accessor method to get the number of rows in this board
-     * 
-     * @return int the number of rows in this board
-     */
-    @Override
-    public int getRowCount()
-    {
-        return board.length;
-    }
-    
-    /**
-     * Accessor method to get the number of columns in this board
-     * 
-     * @return int the number of columns in this board
-     */
-    @Override
-    public int getColumnCount()
-    {
-        return board[0].length;
     }
     
     /**
@@ -374,7 +352,7 @@ public class CollapseBoard extends GridBoard<CollapseCell>
     @Override
     public CollapseCell getValueAt(int row, int col)
     {
-        return board[row][col];
+        return grid[row][col];
     }
 
 }

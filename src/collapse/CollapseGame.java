@@ -176,9 +176,10 @@ public class CollapseGame extends GridGame
         {
             super(text);
             putValue(Action.ACCELERATOR_KEY,
-                    KeyStroke.getKeyStroke('R', ActionEvent.ALT_MASK));
+               KeyStroke.getKeyStroke('R', ActionEvent.ALT_MASK));
         }
         
+        @Override
         public void actionPerformed(ActionEvent e) 
         {
             restart();
@@ -226,10 +227,11 @@ public class CollapseGame extends GridGame
             try
             {
                 int userBoardChoice = Integer.parseInt(userInput);
+                /*Determines if the board is in the valid range*/
                 if(userBoardChoice > 0 && userBoardChoice <= kTotalNumBoards)
                 {
-                	setGame(userBoardChoice);
-                	restart();
+                    setGame(userBoardChoice);
+                    restart();
                 }
             }
             catch(NumberFormatException nfe)

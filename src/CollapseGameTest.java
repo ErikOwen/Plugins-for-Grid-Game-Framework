@@ -10,7 +10,7 @@ public class CollapseGameTest extends TestCase {
 	
 	public void testOne()
 	{
-		String [] args = {"Collapse", "Console", "testdata/testInput1.txt", "testdata/actualOutput1.txt"};
+		String [] args = {"Collapse", "Console", "collapse/testdata/testInput1.txt", "collapse/testdata/actualOutput1.txt"};
 		try
 		{
 			GameLoader.main(args);

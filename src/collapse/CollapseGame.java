@@ -11,6 +11,7 @@ import javax.swing.KeyStroke;
 import gridgame.GridBoard;
 import gridgame.GridGame;
 import gridgame.GridStatus;
+import gridgame.Preferences;
 
 /**
  * Class which represents the game logic for the Collapse plugin
@@ -24,6 +25,7 @@ public class CollapseGame extends GridGame
     private CollapseBoard cBoard;
     private CollapseStatus cStatus;
     private int numMoves;
+    private static final int kTotalNumBoards = 5000;
     
     /**
      * Constructor to create a CollapseGame object
@@ -69,6 +71,7 @@ public class CollapseGame extends GridGame
     public void init()
     {
         setRandomGame();
+//        myPrefs = Preferences.getInstance("collapse");
         cBoard.resetBoard(getGame());
         numMoves = 0;
         
@@ -217,8 +220,11 @@ public class CollapseGame extends GridGame
             try
             {
                 int userBoardChoice = Integer.parseInt(userInput);
-                setGame(userBoardChoice);
-                restart();
+                if(userBoardChoice > 0 && userBoardChoice <= kTotalNumBoards)
+                {
+                	setGame(userBoardChoice);
+                	restart();
+                }
             }
             catch(NumberFormatException nfe)
             {

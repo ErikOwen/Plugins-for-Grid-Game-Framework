@@ -28,6 +28,7 @@ public class KaboomGame extends GridGame
     private int numMoves, flagCount;
     private TimerLabel timer;
     private boolean hasWon, hasLost;
+    private static final int kTotalNumBoards = 5000;
     
     /**
      * Constructor to create a KaboomGame object
@@ -41,8 +42,6 @@ public class KaboomGame extends GridGame
         kBoard = (KaboomBoard)board;
         kStatus = (KaboomStatus)status;
         timer = kStatus.getTimer();
-        
-        //Preferences.getInstance("Kaboom").loadPreferences();
         
         init();
     }
@@ -76,6 +75,8 @@ public class KaboomGame extends GridGame
     public void init()
     {
         setRandomGame();
+//        myPrefs = Preferences.getInstance("kaboom");
+        
         kBoard.resetBoard(getGame());
         numMoves = 0;
         flagCount = 0;
@@ -281,8 +282,11 @@ public class KaboomGame extends GridGame
             try
             {
                 int userBoardChoice = Integer.parseInt(userInput);
-                setGame(userBoardChoice);
-                restart();
+                if(userBoardChoice > 0 && userBoardChoice <= kTotalNumBoards)
+                {
+                	setGame(userBoardChoice);
+                	restart();
+                }
             }
             catch(NumberFormatException nfe)
             {

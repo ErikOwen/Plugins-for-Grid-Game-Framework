@@ -57,17 +57,6 @@ public class CollapseBoard extends GridBoard<CollapseCell>
     }
     
     /**
-     * Clears the specified cell by the row and column coordinates
-     * 
-     * @param row the specified row
-     * @param col the specified column
-     */
-    public void clearCell(int row, int col)
-    {
-        board[row][col].setToEmpty();
-    }
-    
-    /**
      * Determines if the board has been won or not
      * 
      * @return boolean if the board has been cleared

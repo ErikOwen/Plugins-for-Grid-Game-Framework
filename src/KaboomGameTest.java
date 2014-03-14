@@ -10,7 +10,7 @@ public class KaboomGameTest extends TestCase {
 	
 	public void testOne()
 	{
-		String [] args = {"Kaboom", "Console", "testdata/testInput1.txt", "testdata/actualOutput1.txt"};
+		String [] args = {"Kaboom", "Console", "kaboom/testdata/testInput1.txt", "kaboom/testdata/actualOutput1.txt"};
 		try
 		{
 			GameLoader.main(args);
